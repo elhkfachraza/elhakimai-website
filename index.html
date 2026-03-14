@@ -6,67 +6,169 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ElhakimAI Dashboard</title>
+<title>ElhakimAI • Discord AI Bot</title>
 
 <style>
 
-body{
+*{
 margin:0;
-font-family:Arial;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,Arial;
+}
+
+body{
+
 background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 color:white;
+
 }
 
 header{
+
 display:flex;
 justify-content:space-between;
-padding:20px;
+align-items:center;
+padding:20px 40px;
 background:rgba(0,0,0,0.5);
+backdrop-filter:blur(8px);
+
+}
+
+.logo{
+
+font-size:24px;
+font-weight:bold;
+color:#FFD700;
+
 }
 
 nav a{
-margin:10px;
+
 color:white;
 text-decoration:none;
+margin:0 12px;
+font-weight:600;
+
+}
+
+nav a:hover{
+
+color:#FFD700;
+
 }
 
 .hero{
+
 text-align:center;
 padding:120px 20px;
+
 }
 
-button{
-padding:15px 30px;
-border:none;
+.hero h1{
+
+font-size:60px;
+color:#FFD700;
+
+}
+
+.hero p{
+
+margin-top:10px;
+font-size:20px;
+opacity:.9;
+
+}
+
+.btn{
+
+display:inline-block;
+margin-top:30px;
+padding:15px 35px;
 border-radius:10px;
-background:gold;
+background:#FFD700;
+color:black;
 font-weight:bold;
-cursor:pointer;
+text-decoration:none;
+transition:.3s;
+
 }
 
-section{
+.btn:hover{
+
+transform:translateY(-4px);
+box-shadow:0 10px 20px rgba(0,0,0,.4);
+
+}
+
+.section{
+
 padding:80px 20px;
-max-width:1000px;
+max-width:1100px;
 margin:auto;
+
 }
 
-.card{
-background:rgba(255,255,255,0.1);
-padding:20px;
-border-radius:15px;
-margin:15px 0;
+.section h2{
+
+text-align:center;
+font-size:36px;
+margin-bottom:40px;
+color:#FFD700;
+
 }
 
 .grid{
+
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
+
+}
+
+.card{
+
+background:rgba(255,255,255,0.1);
+padding:25px;
+border-radius:15px;
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+background:rgba(255,255,255,0.15);
+
+}
+
+.premium{
+
+background:linear-gradient(135deg,#FFD700,#FFA500);
+color:black;
+text-align:center;
+padding:40px;
+border-radius:20px;
+
+}
+
+.warning{
+
+margin-top:20px;
+padding:15px;
+border-radius:10px;
+background:rgba(255,0,0,0.3);
+
 }
 
 footer{
-text-align:center;
+
+margin-top:80px;
 padding:30px;
+text-align:center;
 background:black;
+font-size:14px;
+
 }
 
 </style>
@@ -77,73 +179,79 @@ background:black;
 
 <header>
 
-<h2>🤖 ElhakimAI</h2>
+<div class="logo">🤖 ElhakimAI</div>
 
 <nav>
 
 <a href="#fitur">Fitur</a>
 <a href="#premium">Premium</a>
 <a href="#invite">Invite</a>
+<a href="#tos">ToS</a>
+<a href="#privacy">Privasi</a>
+<a href="#faq">FAQ</a>
 
 </nav>
 
 </header>
 
-<div class="hero">
+<section class="hero">
 
-<h1>ElhakimAI Discord Bot</h1>
+<h1>ElhakimAI 🤖</h1>
 
-<p>Bot AI modern untuk server Discord.</p>
+<p>Bot AI Discord Modern untuk Komunitas Masa Depan 🚀</p>
 
-<button onclick="login()">Login Discord</button>
+<a class="btn" href="/login">Login Discord</a>
 
-</div>
+</section>
 
-<section id="fitur">
+<section class="section" id="fitur">
 
-<h2>✨ Fitur</h2>
+<h2>✨ Fitur Bot</h2>
 
 <div class="grid">
 
 <div class="card">
-<h3>AI Chat</h3>
-<p>AI pintar untuk chat server.</p>
+<h3>🤖 AI Chat</h3>
+<p>Berinteraksi dengan AI langsung di server Discord kamu.</p>
 </div>
 
 <div class="card">
-<h3>Moderasi</h3>
-<p>Anti spam dan keamanan server.</p>
+<h3>🛡 Moderasi</h3>
+<p>Melindungi server dari spam, raid, dan toxic behavior.</p>
 </div>
 
 <div class="card">
-<h3>Game</h3>
-<p>Mini games untuk member.</p>
+<h3>🎮 Game</h3>
+<p>Mini games seru untuk meningkatkan aktivitas server.</p>
 </div>
 
 <div class="card">
-<h3>Economy</h3>
-<p>Sistem uang server.</p>
+<h3>📊 Statistik</h3>
+<p>Melihat statistik aktivitas server secara real-time.</p>
 </div>
 
 </div>
 
 </section>
 
-<section id="premium">
+<section class="section" id="premium">
 
-<h2>💎 Premium</h2>
+<h2>💎 ElhakimAI Premium</h2>
 
-<div class="card">
+<div class="premium">
 
-<p>Harga mulai</p>
+<h3>Mulai Rp5000 / bulan</h3>
 
-<h1>Rp5000 / bulan</h1>
+<p>Upgrade server kamu dengan fitur premium:</p>
+
+<br>
 
 <ul>
 
-<li>AI lebih kuat</li>
-<li>Economy lanjutan</li>
-<li>Statistik server</li>
+<li>⚡ AI lebih cepat & pintar</li>
+<li>📊 Statistik server lanjutan</li>
+<li>🎮 Game eksklusif</li>
+<li>🛡 Moderasi premium</li>
 
 </ul>
 
@@ -151,51 +259,98 @@ background:black;
 
 </section>
 
-<section id="invite">
+<section class="section" id="invite">
 
 <h2>🚀 Invite Bot</h2>
 
-<a href="https://discord.com/oauth2/authorize?client_id=CLIENTID&permissions=8&scope=bot%20applications.commands">
+<a class="btn"
+href="https://discord.com/oauth2/authorize?client_id=CLIENTID&permissions=8&scope=bot%20applications.commands">
 
-<button>Invite Bot</button>
+Invite ElhakimAI
 
 </a>
 
-<p>⚠ Harus join server support dulu.</p>
+<div class="warning">
+
+⚠ Kamu wajib join server dukungan untuk mendapatkan akses bot.
+
+</div>
+
+<br>
+
+<a class="btn" href="https://discord.gg/yourserver">
+
+Join Discord Support 💬
+
+</a>
 
 </section>
 
-<section>
+<section class="section" id="tos">
 
-<h2>📜 Terms</h2>
+<h2>📜 Terms of Service</h2>
 
 <div class="card">
 
-<p>Bot tidak boleh digunakan untuk spam atau aktivitas ilegal.</p>
+<ul>
+
+<li>🚫 Bot tidak boleh digunakan untuk aktivitas ilegal.</li>
+<li>⚠ Penyalahgunaan bot dapat menyebabkan banned.</li>
+<li>🔧 Fitur dapat berubah sewaktu-waktu.</li>
+
+</ul>
 
 </div>
 
 </section>
 
-<section>
+<section class="section" id="privacy">
 
-<h2>🔒 Privacy</h2>
+<h2>🔐 Privacy Policy</h2>
 
 <div class="card">
 
-<p>Kami hanya menyimpan ID user dan server untuk menjalankan fitur bot.</p>
+<ul>
+
+<li>📌 Kami hanya menyimpan User ID dan Server ID.</li>
+<li>🔒 Data digunakan untuk menjalankan fitur bot.</li>
+<li>🚫 Kami tidak menjual data pengguna.</li>
+
+</ul>
 
 </div>
 
 </section>
 
-<section id="dashboard">
+<section class="section" id="faq">
 
-<h2>📊 Dashboard</h2>
+<h2>❓ FAQ</h2>
+
+<div class="grid">
 
 <div class="card">
 
-<p>Dashboard akan muncul setelah login Discord.</p>
+<h3>Apakah bot gratis?</h3>
+
+<p>Ya, tersedia versi gratis dengan fitur dasar.</p>
+
+</div>
+
+<div class="card">
+
+<h3>Apakah bot aman?</h3>
+
+<p>Bot mengikuti kebijakan API Discord.</p>
+
+</div>
+
+<div class="card">
+
+<h3>Kapan dashboard tersedia?</h3>
+
+<p>Dashboard sedang dalam pengembangan.</p>
+
+</div>
 
 </div>
 
@@ -203,19 +358,9 @@ background:black;
 
 <footer>
 
-© 2026 ElhakimAI
+© 2026 ElhakimAI • Discord AI Bot
 
 </footer>
-
-<script>
-
-function login(){
-
-alert("Login Discord akan mengarah ke OAuth server.")
-
-}
-
-</script>
 
 </body>
 
