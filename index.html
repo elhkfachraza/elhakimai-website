@@ -1,367 +1,270 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElhakimAI - Bot Discord Masa Depan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: #050816; color: #e2e8f0; scroll-behavior: smooth; overflow-x: hidden; }
+        
+        /* Custom Background Glow */
+        .glow { position: fixed; width: 400px; height: 400px; background: rgba(56, 189, 248, 0.15); filter: blur(100px); border-radius: 50%; z-index: -1; }
+        .glow-1 { top: -100px; right: -100px; }
+        .glow-2 { bottom: -100px; left: -100px; }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .gradient-text { background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .btn-primary { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); transition: all 0.3s; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5); }
+        
+        section { display: none; padding-top: 100px; min-height: 100vh; }
+        section.active { display: block; animation: fadeIn 0.5s ease; }
 
-<title>ElhakimAI • Discord AI Bot</title>
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Segoe UI,Arial;
-}
-
-body{
-
-background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-color:white;
-
-}
-
-header{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-background:rgba(0,0,0,0.5);
-backdrop-filter:blur(8px);
-
-}
-
-.logo{
-
-font-size:24px;
-font-weight:bold;
-color:#FFD700;
-
-}
-
-nav a{
-
-color:white;
-text-decoration:none;
-margin:0 12px;
-font-weight:600;
-
-}
-
-nav a:hover{
-
-color:#FFD700;
-
-}
-
-.hero{
-
-text-align:center;
-padding:120px 20px;
-
-}
-
-.hero h1{
-
-font-size:60px;
-color:#FFD700;
-
-}
-
-.hero p{
-
-margin-top:10px;
-font-size:20px;
-opacity:.9;
-
-}
-
-.btn{
-
-display:inline-block;
-margin-top:30px;
-padding:15px 35px;
-border-radius:10px;
-background:#FFD700;
-color:black;
-font-weight:bold;
-text-decoration:none;
-transition:.3s;
-
-}
-
-.btn:hover{
-
-transform:translateY(-4px);
-box-shadow:0 10px 20px rgba(0,0,0,.4);
-
-}
-
-.section{
-
-padding:80px 20px;
-max-width:1100px;
-margin:auto;
-
-}
-
-.section h2{
-
-text-align:center;
-font-size:36px;
-margin-bottom:40px;
-color:#FFD700;
-
-}
-
-.grid{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-
-}
-
-.card{
-
-background:rgba(255,255,255,0.1);
-padding:25px;
-border-radius:15px;
-transition:.3s;
-
-}
-
-.card:hover{
-
-transform:translateY(-6px);
-background:rgba(255,255,255,0.15);
-
-}
-
-.premium{
-
-background:linear-gradient(135deg,#FFD700,#FFA500);
-color:black;
-text-align:center;
-padding:40px;
-border-radius:20px;
-
-}
-
-.warning{
-
-margin-top:20px;
-padding:15px;
-border-radius:10px;
-background:rgba(255,0,0,0.3);
-
-}
-
-footer{
-
-margin-top:80px;
-padding:30px;
-text-align:center;
-background:black;
-font-size:14px;
-
-}
-
-</style>
-
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+    </style>
 </head>
-
 <body>
-
-<header>
-
-<div class="logo">🤖 ElhakimAI</div>
-
-<nav>
-
-<a href="#fitur">Fitur</a>
-<a href="#premium">Premium</a>
-<a href="#invite">Invite</a>
-<a href="#tos">ToS</a>
-<a href="#privacy">Privasi</a>
-<a href="#faq">FAQ</a>
-
-</nav>
-
-</header>
-
-<section class="hero">
-
-<h1>ElhakimAI 🤖</h1>
-
-<p>Bot AI Discord Modern untuk Komunitas Masa Depan 🚀</p>
-
-<a class="btn" href="/login">Login Discord</a>
-
-</section>
-
-<section class="section" id="fitur">
-
-<h2>✨ Fitur Bot</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>🤖 AI Chat</h3>
-<p>Berinteraksi dengan AI langsung di server Discord kamu.</p>
-</div>
-
-<div class="card">
-<h3>🛡 Moderasi</h3>
-<p>Melindungi server dari spam, raid, dan toxic behavior.</p>
-</div>
-
-<div class="card">
-<h3>🎮 Game</h3>
-<p>Mini games seru untuk meningkatkan aktivitas server.</p>
-</div>
-
-<div class="card">
-<h3>📊 Statistik</h3>
-<p>Melihat statistik aktivitas server secara real-time.</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="section" id="premium">
-
-<h2>💎 ElhakimAI Premium</h2>
-
-<div class="premium">
-
-<h3>Mulai Rp5000 / bulan</h3>
-
-<p>Upgrade server kamu dengan fitur premium:</p>
-
-<br>
-
-<ul>
-
-<li>⚡ AI lebih cepat & pintar</li>
-<li>📊 Statistik server lanjutan</li>
-<li>🎮 Game eksklusif</li>
-<li>🛡 Moderasi premium</li>
-
-</ul>
-
-</div>
-
-</section>
-
-<section class="section" id="invite">
-
-<h2>🚀 Invite Bot</h2>
-
-<a class="btn"
-href="https://discord.com/oauth2/authorize?client_id=CLIENTID&permissions=8&scope=bot%20applications.commands">
-
-Invite ElhakimAI
-
-</a>
-
-<div class="warning">
-
-⚠ Kamu wajib join server dukungan untuk mendapatkan akses bot.
-
-</div>
-
-<br>
-
-<a class="btn" href="https://discord.gg/yourserver">
-
-Join Discord Support 💬
-
-</a>
-
-</section>
-
-<section class="section" id="tos">
-
-<h2>📜 Terms of Service</h2>
-
-<div class="card">
-
-<ul>
-
-<li>🚫 Bot tidak boleh digunakan untuk aktivitas ilegal.</li>
-<li>⚠ Penyalahgunaan bot dapat menyebabkan banned.</li>
-<li>🔧 Fitur dapat berubah sewaktu-waktu.</li>
-
-</ul>
-
-</div>
-
-</section>
-
-<section class="section" id="privacy">
-
-<h2>🔐 Privacy Policy</h2>
-
-<div class="card">
-
-<ul>
-
-<li>📌 Kami hanya menyimpan User ID dan Server ID.</li>
-<li>🔒 Data digunakan untuk menjalankan fitur bot.</li>
-<li>🚫 Kami tidak menjual data pengguna.</li>
-
-</ul>
-
-</div>
-
-</section>
-
-<section class="section" id="faq">
-
-<h2>❓ FAQ</h2>
-
-<div class="grid">
-
-<div class="card">
-
-<h3>Apakah bot gratis?</h3>
-
-<p>Ya, tersedia versi gratis dengan fitur dasar.</p>
-
-</div>
-
-<div class="card">
-
-<h3>Apakah bot aman?</h3>
-
-<p>Bot mengikuti kebijakan API Discord.</p>
-
-</div>
-
-<div class="card">
-
-<h3>Kapan dashboard tersedia?</h3>
-
-<p>Dashboard sedang dalam pengembangan.</p>
-
-</div>
-
-</div>
-
-</section>
-
-<footer>
-
-© 2026 ElhakimAI • Discord AI Bot
-
-</footer>
-
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <nav class="fixed w-full z-[100] glass px-6 py-4 flex justify-between items-center top-0">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="showSection('home')">
+            <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-xl">E</div>
+            <span class="text-2xl font-extrabold tracking-tighter gradient-text">ElhakimAI</span>
+        </div>
+        
+        <div class="hidden lg:flex items-center gap-8 font-semibold text-sm uppercase tracking-widest text-gray-400">
+            <a href="javascript:void(0)" onclick="showSection('home')" class="hover:text-white transition">Home</a>
+            <a href="javascript:void(0)" onclick="showSection('fitur')" class="hover:text-white transition">Fitur</a>
+            <a href="javascript:void(0)" onclick="showSection('tos')" class="hover:text-white transition">TOS</a>
+            <a href="javascript:void(0)" onclick="showSection('privacy')" class="hover:text-white transition">Privacy</a>
+            <a href="javascript:void(0)" onclick="showSection('contact')" class="hover:text-white transition">Contact</a>
+        </div>
+
+        <div id="auth-area">
+            <button onclick="loginDiscord()" class="btn-primary px-6 py-2.5 rounded-full text-sm font-bold flex items-center gap-2">
+                <i class="fab fa-discord text-lg"></i> LOGIN
+            </button>
+        </div>
+    </nav>
+
+    <section id="home" class="active flex flex-col items-center justify-center text-center px-4">
+        <div class="inline-block px-4 py-1.5 glass rounded-full text-xs font-bold text-blue-400 mb-6 uppercase tracking-widest">
+            🚀 The Most Advanced Discord Bot 2024
+        </div>
+        <h1 class="text-5xl md:text-8xl font-extrabold mb-6 leading-tight">
+            Level Up Your Server <br> With <span class="gradient-text">Intelligence.</span>
+        </h1>
+        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mb-10">
+            ElhakimAI membawa kekuatan Artificial Intelligence ke dalam Discord Anda. Moderasi otomatis, generator gambar, dan asisten cerdas dalam satu bot.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+            <button onclick="inviteBot()" class="btn-primary px-10 py-4 rounded-xl font-bold text-lg">Invite ElhakimAI</button>
+            <button onclick="showSection('fitur')" class="glass px-10 py-4 rounded-xl font-bold text-lg hover:bg-white/5 transition">Lihat Fitur</button>
+        </div>
+    </section>
+
+    <section id="fitur" class="px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">Fitur Unggulan</h2>
+            <p class="text-gray-400">Teknologi tercanggih yang belum pernah ada sebelumnya.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass p-10 rounded-3xl hover:border-blue-500/50 transition group">
+                <div class="w-14 h-14 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                    <i class="fas fa-robot text-2xl text-blue-400"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Smart GPT-4 AI</h3>
+                <p class="text-gray-400 leading-relaxed">Diskusi cerdas, coding help, hingga roleplay asisten pribadi dengan model bahasa terbaru.</p>
+            </div>
+            <div class="glass p-10 rounded-3xl hover:border-purple-500/50 transition group">
+                <div class="w-14 h-14 bg-purple-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                    <i class="fas fa-image text-2xl text-purple-400"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">AI Image Gen</h3>
+                <p class="text-gray-400 leading-relaxed">Buat gambar spektakuler langsung dari chat Discord hanya dengan perintah teks sederhana.</p>
+            </div>
+            <div class="glass p-10 rounded-3xl hover:border-red-500/50 transition group">
+                <div class="w-14 h-14 bg-red-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                    <i class="fas fa-shield-virus text-2xl text-red-400"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Auto-Mod Pro</h3>
+                <p class="text-gray-400 leading-relaxed">Sistem anti-spam, anti-link, dan filter konten toxic berbasis AI yang belajar dari pola chat.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard" class="px-6 max-w-7xl mx-auto">
+        <div id="user-profile" class="glass p-8 rounded-3xl mb-10 flex flex-col md:flex-row items-center gap-6">
+            </div>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="glass p-8 rounded-3xl">
+                <h3 class="text-xl font-bold mb-6">Server Aktif Anda</h3>
+                <div id="guilds-list" class="space-y-4">
+                    <p class="text-gray-500">Memuat server...</p>
+                </div>
+            </div>
+            <div class="glass p-8 rounded-3xl">
+                <h3 class="text-xl font-bold mb-6">Statistik Penggunaan AI</h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between"><span>Token Terpakai</span><span class="text-blue-400">1,240 / 5,000</span></div>
+                    <div class="w-full bg-gray-800 h-2 rounded-full"><div class="bg-blue-500 h-2 rounded-full w-[25%]"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tos" class="px-6 max-w-4xl mx-auto pb-20">
+        <h2 class="text-4xl font-extrabold mb-8">Terms of Service</h2>
+        <div class="glass p-8 rounded-3xl prose prose-invert max-w-none text-gray-400 leading-loose">
+            <h3 class="text-white font-bold text-xl mb-4 underline">1. Penerimaan Ketentuan</h3>
+            <p class="mb-6">Dengan mengakses ElhakimAI, Anda setuju untuk terikat oleh Ketentuan Layanan ini, semua hukum dan peraturan yang berlaku, dan setuju bahwa Anda bertanggung jawab untuk kepatuhan terhadap hukum setempat yang berlaku. Jika Anda tidak setuju dengan ketentuan ini, Anda dilarang menggunakan atau mengakses bot ini.</p>
+            
+            <h3 class="text-white font-bold text-xl mb-4 underline">2. Lisensi Penggunaan</h3>
+            <p class="mb-4">Izin diberikan untuk sementara mengunduh satu salinan materi di situs web ElhakimAI untuk tampilan transien pribadi non-komersial saja. Ini adalah pemberian lisensi, bukan pengalihan hak milik, dan di bawah lisensi ini Anda tidak boleh:</p>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Memodifikasi atau menyalin materi.</li>
+                <li>Menggunakan materi untuk tujuan komersial apa pun.</li>
+                <li>Mencoba mendekompilasi atau merekayasa balik perangkat lunak bot ElhakimAI.</li>
+                <li>Menghapus hak cipta atau notasi kepemilikan lainnya.</li>
+            </ul>
+
+            <h3 class="text-white font-bold text-xl mb-4 underline">3. Penyangkalan</h3>
+            <p class="mb-6">Materi di ElhakimAI disediakan 'apa adanya'. ElhakimAI tidak memberikan jaminan, tersurat maupun tersirat, dan dengan ini menyangkal semua jaminan lainnya termasuk, tanpa batasan, jaminan tersirat atau kondisi dapat diperjualbelikan.</p>
+
+            <h3 class="text-white font-bold text-xl mb-4 underline">4. Batasan Tanggung Jawab</h3>
+            <p>Dalam keadaan apa pun ElhakimAI atau pemasoknya tidak bertanggung jawab atas kerusakan apa pun yang timbul dari penggunaan atau ketidakmampuan untuk menggunakan bot ElhakimAI...</p>
+        </div>
+    </section>
+
+    <section id="privacy" class="px-6 max-w-4xl mx-auto pb-20">
+        <h2 class="text-4xl font-extrabold mb-8">Privacy Policy</h2>
+        <div class="glass p-8 rounded-3xl text-gray-400 leading-loose">
+            <h3 class="text-white font-bold text-xl mb-4">Data Yang Kami Kumpulkan</h3>
+            <p class="mb-6">Privasi Anda penting bagi kami. Kami hanya mengumpulkan data publik dari Discord seperti Username, User ID, dan Server ID untuk memfungsikan fitur bot. Kami tidak merekam isi pesan chat kecuali jika perintah spesifik AI dijalankan.</p>
+            
+            <h3 class="text-white font-bold text-xl mb-4">Penggunaan Data</h3>
+            <p class="mb-6">Data digunakan semata-mata untuk personalisasi pengalaman Anda dan keamanan sistem kami dari penyalahgunaan. Kami tidak akan pernah menjual data Anda ke pihak ketiga manapun.</p>
+            
+            <h3 class="text-white font-bold text-xl mb-4">Keamanan</h3>
+            <p>Kami menggunakan enkripsi standar industri untuk melindungi data yang dikirimkan kepada kami.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="px-6 flex flex-col items-center justify-center text-center">
+        <div class="glass p-12 rounded-[40px] max-w-2xl w-full border-blue-500/20 shadow-2xl shadow-blue-500/5">
+            <h2 class="text-4xl font-bold mb-4">Hubungi Kami</h2>
+            <p class="text-gray-400 mb-8">Ada pertanyaan atau menemukan bug? Kami siap membantu.</p>
+            <form class="space-y-4" onsubmit="event.preventDefault(); alert('Pesan terkirim! (Simulasi)');">
+                <input type="text" placeholder="Nama Anda" class="w-full glass bg-white/5 p-4 rounded-xl focus:outline-none focus:border-blue-500 transition">
+                <input type="email" placeholder="Email Anda" class="w-full glass bg-white/5 p-4 rounded-xl focus:outline-none focus:border-blue-500 transition">
+                <textarea placeholder="Pesan Anda" rows="4" class="w-full glass bg-white/5 p-4 rounded-xl focus:outline-none focus:border-blue-500 transition"></textarea>
+                <button type="submit" class="btn-primary w-full py-4 rounded-xl font-bold">Kirim Pesan</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="glass border-t-0 py-10 px-6 text-center">
+        <p class="text-gray-500 text-sm mb-2">&copy; 2024 ElhakimAI Development Team. All Rights Reserved.</p>
+        <div class="flex justify-center gap-6 text-xl text-gray-400">
+            <i class="fab fa-discord hover:text-blue-400 cursor-pointer"></i>
+            <i class="fab fa-twitter hover:text-blue-400 cursor-pointer"></i>
+            <i class="fab fa-github hover:text-white cursor-pointer"></i>
+        </div>
+    </footer>
+
+    <script>
+        // KONFIGURASI DISCORD (Ganti CLIENT_ID dengan milikmu!)
+        const CLIENT_ID = 'YOUR_DISCORD_CLIENT_ID'; 
+        const REDIRECT_URI = window.location.origin + '/';
+
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function inviteBot() {
+            window.open(`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&permissions=8&scope=bot%20applications.commands`, '_blank');
+        }
+
+        function loginDiscord() {
+            // Implicit Flow: Lebih aman untuk aplikasi 1 file tanpa backend
+            const scope = encodeURIComponent('identify guilds');
+            const url = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${scope}`;
+            window.location.href = url;
+        }
+
+        // Cek Token di URL setelah login
+        window.onload = () => {
+            const fragment = new URLSearchParams(window.location.hash.slice(1));
+            const accessToken = fragment.get('access_token');
+
+            if (accessToken) {
+                fetchUserData(accessToken);
+                // Bersihkan URL agar token tidak terlihat
+                window.history.replaceState({}, document.title, "/");
+            }
+        };
+
+        async function fetchUserData(token) {
+            try {
+                const response = await fetch('https://discord.com/api/users/@me', {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const user = await response.json();
+                
+                // Update UI Profil
+                document.getElementById('auth-area').innerHTML = `
+                    <div class="flex items-center gap-3 glass py-1.5 px-4 rounded-full border-blue-500/30">
+                        <img src="https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png" class="w-8 h-8 rounded-full border border-blue-400">
+                        <span class="font-bold text-sm text-blue-100">${user.username}</span>
+                        <button onclick="location.reload()" class="text-gray-500 hover:text-red-400"><i class="fas fa-sign-out-alt"></i></button>
+                    </div>
+                `;
+
+                document.getElementById('user-profile').innerHTML = `
+                    <img src="https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png" class="w-24 h-24 rounded-full border-4 border-blue-500/50 shadow-xl shadow-blue-500/20">
+                    <div class="text-center md:text-left">
+                        <h2 class="text-3xl font-black mb-1">Selamat Datang, ${user.username}!</h2>
+                        <p class="text-gray-400">User ID: ${user.id} • Paket: <span class="text-blue-400 font-bold underline">Premium AI Plan</span></p>
+                    </div>
+                `;
+
+                showSection('dashboard');
+                fetchGuilds(token);
+            } catch (e) {
+                console.error("Gagal ambil data user", e);
+            }
+        }
+
+        async function fetchGuilds(token) {
+            const res = await fetch('https://discord.com/api/users/@me/guilds', {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            const guilds = await res.json();
+            const list = document.getElementById('guilds-list');
+            list.innerHTML = guilds.slice(0, 5).map(g => `
+                <div class="flex items-center justify-between p-4 glass bg-white/5 rounded-2xl hover:bg-white/10 transition">
+                    <div class="flex items-center gap-4">
+                        ${g.icon ? `<img src="https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png" class="w-10 h-10 rounded-xl">` : `<div class="w-10 h-10 bg-gray-700 rounded-xl flex items-center justify-center font-bold">${g.name[0]}</div>`}
+                        <span class="font-bold">${g.name}</span>
+                    </div>
+                    <button onclick="inviteBot()" class="text-xs bg-blue-600/20 text-blue-400 px-3 py-1.5 rounded-lg border border-blue-500/30 hover:bg-blue-600 hover:text-white transition">Kelola</button>
+                </div>
+            `).join('');
+        }
+    </script>
 </body>
-
 </html>
