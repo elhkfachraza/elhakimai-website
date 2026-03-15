@@ -3,190 +3,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ElhakimAI - Bot Discord Masa Depan</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>ElhakimAI 🤖 | Bot Discord Tercanggih & Terkeren</title>
     
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@100;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
     <style>
-        * { font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: #050816; color: #e2e8f0; scroll-behavior: smooth; overflow-x: hidden; }
-        
-        /* Custom Background Glow */
-        .glow { position: fixed; width: 400px; height: 400px; background: rgba(56, 189, 248, 0.15); filter: blur(100px); border-radius: 50%; z-index: -1; }
-        .glow-1 { top: -100px; right: -100px; }
-        .glow-2 { bottom: -100px; left: -100px; }
+        :root {
+            --primary: #3b82f6;
+            --secondary: #8b5cf6;
+            --accent: #00f2ff;
+            --bg-dark: #030712;
+            --card-bg: rgba(17, 24, 39, 0.7);
+        }
 
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .gradient-text { background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        .btn-primary { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); transition: all 0.3s; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5); }
-        
-        section { display: none; padding-top: 100px; min-height: 100vh; }
-        section.active { display: block; animation: fadeIn 0.5s ease; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: #f3f4f6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        h1, h2, h3, .nav-logo { font-family: 'Space Grotesk', sans-serif; }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        /* --- Animasi Background Bergerak --- */
+        .bg-animate {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px; height: 500px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            filter: blur(80px);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(20%, 20%); }
+        }
+
+        /* --- Glassmorphism & Effects --- */
+        .glass {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, var(--accent), var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: 0.3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0%; height: 2px;
+            background: var(--accent);
+            transition: 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* --- Section Management --- */
+        section { display: none; min-height: 100vh; padding-top: 120px; }
+        section.active { display: block; animation: fadeInUp 0.8s ease forwards; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #0b0f1a; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(var(--primary), var(--secondary)); border-radius: 5px; }
+
+        .btn-hover:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
     </style>
 </head>
 <body>
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
 
-    <nav class="fixed w-full z-[100] glass px-6 py-4 flex justify-between items-center top-0">
-        <div class="flex items-center gap-2 cursor-pointer" onclick="showSection('home')">
-            <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-xl">E</div>
-            <span class="text-2xl font-extrabold tracking-tighter gradient-text">ElhakimAI</span>
-        </div>
-        
-        <div class="hidden lg:flex items-center gap-8 font-semibold text-sm uppercase tracking-widest text-gray-400">
-            <a href="javascript:void(0)" onclick="showSection('home')" class="hover:text-white transition">Home</a>
-            <a href="javascript:void(0)" onclick="showSection('fitur')" class="hover:text-white transition">Fitur</a>
-            <a href="javascript:void(0)" onclick="showSection('tos')" class="hover:text-white transition">TOS</a>
-            <a href="javascript:void(0)" onclick="showSection('privacy')" class="hover:text-white transition">Privacy</a>
-            <a href="javascript:void(0)" onclick="showSection('contact')" class="hover:text-white transition">Contact</a>
-        </div>
+    <div class="bg-animate">
+        <div class="blob"></div>
+    </div>
 
-        <div id="auth-area">
-            <button onclick="loginDiscord()" class="btn-primary px-6 py-2.5 rounded-full text-sm font-bold flex items-center gap-2">
-                <i class="fab fa-discord text-lg"></i> LOGIN
-            </button>
+    <nav class="fixed top-0 left-0 w-full z-[1000] glass px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="showSection('home')">
+                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-2xl shadow-lg group-hover:rotate-12 transition">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <span class="text-3xl font-black tracking-tighter gradient-text">ElhakimAI</span>
+            </div>
+
+            <div class="hidden lg:flex gap-8 items-center text-sm font-bold uppercase tracking-widest">
+                <a href="javascript:void(0)" onclick="showSection('home')" class="nav-link">🏠 Home</a>
+                <a href="javascript:void(0)" onclick="showSection('fitur')" class="nav-link">⚡ Fitur</a>
+                <a href="javascript:void(0)" onclick="showSection('dashboard')" class="nav-link">📊 Dashboard</a>
+                <a href="javascript:void(0)" onclick="showSection('tos')" class="nav-link">📜 TOS</a>
+                <a href="javascript:void(0)" onclick="showSection('privacy')" class="nav-link">🔒 Privacy</a>
+                <a href="javascript:void(0)" onclick="showSection('contact')" class="nav-link">📞 Contact</a>
+            </div>
+
+            <div id="auth-btn-container">
+                <button onclick="loginDiscord()" class="btn-hover bg-gradient-to-r from-blue-600 to-indigo-700 px-8 py-3 rounded-full font-bold shadow-lg flex items-center gap-2">
+                    <i class="fab fa-discord text-xl"></i> LOGIN DISCORD
+                </button>
+            </div>
         </div>
     </nav>
 
     <section id="home" class="active flex flex-col items-center justify-center text-center px-4">
-        <div class="inline-block px-4 py-1.5 glass rounded-full text-xs font-bold text-blue-400 mb-6 uppercase tracking-widest">
-            🚀 The Most Advanced Discord Bot 2024
+        <div class="bg-blue-500/10 border border-blue-500/30 text-blue-400 px-6 py-2 rounded-full text-sm font-bold mb-8 animate-pulse">
+            🔥 VERSI 3.0 SEGERA RILIS - MODEL AI TERBARU
         </div>
-        <h1 class="text-5xl md:text-8xl font-extrabold mb-6 leading-tight">
-            Level Up Your Server <br> With <span class="gradient-text">Intelligence.</span>
+        <h1 class="text-6xl md:text-9xl font-black mb-8 leading-none">
+            MASA DEPAN <br> <span class="gradient-text">DISCORD</span> DISINI.
         </h1>
-        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mb-10">
-            ElhakimAI membawa kekuatan Artificial Intelligence ke dalam Discord Anda. Moderasi otomatis, generator gambar, dan asisten cerdas dalam satu bot.
+        <p class="text-gray-400 text-lg md:text-2xl max-w-3xl mb-12 font-light">
+            Satu bot untuk segalanya. Dari moderasi bertenaga AI hingga pembuatan gambar spektakuler dalam hitungan detik. ✨
         </p>
-        <div class="flex flex-col sm:flex-row gap-4">
-            <button onclick="inviteBot()" class="btn-primary px-10 py-4 rounded-xl font-bold text-lg">Invite ElhakimAI</button>
-            <button onclick="showSection('fitur')" class="glass px-10 py-4 rounded-xl font-bold text-lg hover:bg-white/5 transition">Lihat Fitur</button>
+        <div class="flex flex-wrap justify-center gap-6">
+            <button onclick="inviteBot()" class="btn-hover bg-white text-black px-12 py-5 rounded-2xl font-black text-xl flex items-center gap-3">
+                <i class="fas fa-plus-circle"></i> INVITE BOT
+            </button>
+            <button onclick="showSection('fitur')" class="btn-hover glass px-12 py-5 rounded-2xl font-black text-xl flex items-center gap-3">
+                <i class="fas fa-rocket"></i> EXPLORE
+            </button>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 max-w-5xl w-full">
+            <div class="glass p-6 rounded-3xl">
+                <div class="text-4xl font-black text-accent">500k+</div>
+                <div class="text-gray-500 uppercase text-xs tracking-widest font-bold">Users</div>
+            </div>
+            <div class="glass p-6 rounded-3xl">
+                <div class="text-4xl font-black text-primary">15k+</div>
+                <div class="text-gray-500 uppercase text-xs tracking-widest font-bold">Servers</div>
+            </div>
+            <div class="glass p-6 rounded-3xl">
+                <div class="text-4xl font-black text-secondary">99.9%</div>
+                <div class="text-gray-500 uppercase text-xs tracking-widest font-bold">Uptime</div>
+            </div>
+            <div class="glass p-6 rounded-3xl">
+                <div class="text-4xl font-black text-green-400">24/7</div>
+                <div class="text-gray-500 uppercase text-xs tracking-widest font-bold">Support</div>
+            </div>
         </div>
     </section>
 
-    <section id="fitur" class="px-6 max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4">Fitur Unggulan</h2>
-            <p class="text-gray-400">Teknologi tercanggih yang belum pernah ada sebelumnya.</p>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="glass p-10 rounded-3xl hover:border-blue-500/50 transition group">
-                <div class="w-14 h-14 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                    <i class="fas fa-robot text-2xl text-blue-400"></i>
+    <section id="fitur" class="px-6 pb-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl font-black mb-4 uppercase italic">Kenapa Harus ElhakimAI? 💎</h2>
+                <div class="h-1 w-40 bg-gradient-to-r from-transparent via-blue-500 to-transparent mx-auto"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-10">
+                <div class="group relative">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-[40px] blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
+                    <div class="relative glass p-10 rounded-[40px] h-full flex flex-col">
+                        <div class="w-20 h-20 bg-blue-500/20 rounded-3xl flex items-center justify-center text-4xl text-blue-400 mb-8">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4">AI Chat Genius</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">Dilengkapi dengan model terbaru yang mampu memahami konteks, menulis kode, hingga menjadi teman curhat member server kamu.</p>
+                        <ul class="text-sm space-y-3 mt-auto">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> Bahasa Indonesia Lancar</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> Mode Roleplay AI</li>
+                        </ul>
+                    </div>
                 </div>
-                <h3 class="text-2xl font-bold mb-4">Smart GPT-4 AI</h3>
-                <p class="text-gray-400 leading-relaxed">Diskusi cerdas, coding help, hingga roleplay asisten pribadi dengan model bahasa terbaru.</p>
-            </div>
-            <div class="glass p-10 rounded-3xl hover:border-purple-500/50 transition group">
-                <div class="w-14 h-14 bg-purple-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                    <i class="fas fa-image text-2xl text-purple-400"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-4">AI Image Gen</h3>
-                <p class="text-gray-400 leading-relaxed">Buat gambar spektakuler langsung dari chat Discord hanya dengan perintah teks sederhana.</p>
-            </div>
-            <div class="glass p-10 rounded-3xl hover:border-red-500/50 transition group">
-                <div class="w-14 h-14 bg-red-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                    <i class="fas fa-shield-virus text-2xl text-red-400"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-4">Auto-Mod Pro</h3>
-                <p class="text-gray-400 leading-relaxed">Sistem anti-spam, anti-link, dan filter konten toxic berbasis AI yang belajar dari pola chat.</p>
-            </div>
-        </div>
-    </section>
 
-    <section id="dashboard" class="px-6 max-w-7xl mx-auto">
-        <div id="user-profile" class="glass p-8 rounded-3xl mb-10 flex flex-col md:flex-row items-center gap-6">
-            </div>
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="glass p-8 rounded-3xl">
-                <h3 class="text-xl font-bold mb-6">Server Aktif Anda</h3>
-                <div id="guilds-list" class="space-y-4">
-                    <p class="text-gray-500">Memuat server...</p>
+                <div class="group relative">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-500 rounded-[40px] blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
+                    <div class="relative glass p-10 rounded-[40px] h-full flex flex-col">
+                        <div class="w-20 h-20 bg-purple-500/20 rounded-3xl flex items-center justify-center text-4xl text-purple-400 mb-8">
+                            <i class="fas fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4">God-Level Guard</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">Moderasi otomatis yang tidak bisa ditembus. Anti-raid, anti-spam, dan filter media porno secara real-time.</p>
+                        <ul class="text-sm space-y-3 mt-auto">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> DeepScan Media</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> Log Super Lengkap</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="glass p-8 rounded-3xl">
-                <h3 class="text-xl font-bold mb-6">Statistik Penggunaan AI</h3>
-                <div class="space-y-4">
-                    <div class="flex justify-between"><span>Token Terpakai</span><span class="text-blue-400">1,240 / 5,000</span></div>
-                    <div class="w-full bg-gray-800 h-2 rounded-full"><div class="bg-blue-500 h-2 rounded-full w-[25%]"></div></div>
+
+                <div class="group relative">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-[40px] blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
+                    <div class="relative glass p-10 rounded-[40px] h-full flex flex-col">
+                        <div class="w-20 h-20 bg-orange-500/20 rounded-3xl flex items-center justify-center text-4xl text-orange-400 mb-8">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4">Hyper Music</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">Putar lagu dari platform manapun dengan kualitas audio 320kbps tanpa lag. Lengkap dengan lirik dan efek filter.</p>
+                        <ul class="text-sm space-y-3 mt-auto">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> Spotify & SoundCloud</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> Bass Boosted Mode</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="tos" class="px-6 max-w-4xl mx-auto pb-20">
-        <h2 class="text-4xl font-extrabold mb-8">Terms of Service</h2>
-        <div class="glass p-8 rounded-3xl prose prose-invert max-w-none text-gray-400 leading-loose">
-            <h3 class="text-white font-bold text-xl mb-4 underline">1. Penerimaan Ketentuan</h3>
-            <p class="mb-6">Dengan mengakses ElhakimAI, Anda setuju untuk terikat oleh Ketentuan Layanan ini, semua hukum dan peraturan yang berlaku, dan setuju bahwa Anda bertanggung jawab untuk kepatuhan terhadap hukum setempat yang berlaku. Jika Anda tidak setuju dengan ketentuan ini, Anda dilarang menggunakan atau mengakses bot ini.</p>
-            
-            <h3 class="text-white font-bold text-xl mb-4 underline">2. Lisensi Penggunaan</h3>
-            <p class="mb-4">Izin diberikan untuk sementara mengunduh satu salinan materi di situs web ElhakimAI untuk tampilan transien pribadi non-komersial saja. Ini adalah pemberian lisensi, bukan pengalihan hak milik, dan di bawah lisensi ini Anda tidak boleh:</p>
-            <ul class="list-disc ml-6 mb-6">
-                <li>Memodifikasi atau menyalin materi.</li>
-                <li>Menggunakan materi untuk tujuan komersial apa pun.</li>
-                <li>Mencoba mendekompilasi atau merekayasa balik perangkat lunak bot ElhakimAI.</li>
-                <li>Menghapus hak cipta atau notasi kepemilikan lainnya.</li>
-            </ul>
+    <section id="dashboard" class="px-6">
+        <div class="max-w-6xl mx-auto">
+            <div id="dash-guest" class="text-center py-20 glass rounded-[50px]">
+                <i class="fas fa-lock text-6xl text-gray-700 mb-6"></i>
+                <h2 class="text-4xl font-bold mb-4">Area Terbatas! 🛑</h2>
+                <p class="text-gray-400 mb-8 max-w-md mx-auto">Silakan login menggunakan akun Discord kamu untuk mengakses dashboard manajemen server ElhakimAI.</p>
+                <button onclick="loginDiscord()" class="bg-[#5865F2] hover:bg-indigo-600 px-10 py-4 rounded-2xl font-black transition flex items-center gap-3 mx-auto">
+                    <i class="fab fa-discord text-2xl"></i> LOGIN SEKARANG
+                </button>
+            </div>
 
-            <h3 class="text-white font-bold text-xl mb-4 underline">3. Penyangkalan</h3>
-            <p class="mb-6">Materi di ElhakimAI disediakan 'apa adanya'. ElhakimAI tidak memberikan jaminan, tersurat maupun tersirat, dan dengan ini menyangkal semua jaminan lainnya termasuk, tanpa batasan, jaminan tersirat atau kondisi dapat diperjualbelikan.</p>
-
-            <h3 class="text-white font-bold text-xl mb-4 underline">4. Batasan Tanggung Jawab</h3>
-            <p>Dalam keadaan apa pun ElhakimAI atau pemasoknya tidak bertanggung jawab atas kerusakan apa pun yang timbul dari penggunaan atau ketidakmampuan untuk menggunakan bot ElhakimAI...</p>
+            <div id="dash-user" class="hidden animate-fadeIn">
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="glass p-8 rounded-[40px] lg:col-span-1 text-center">
+                        <img id="u-avatar" src="" class="w-32 h-32 rounded-full mx-auto border-4 border-accent shadow-2xl mb-6">
+                        <h3 id="u-name" class="text-3xl font-black mb-2">User</h3>
+                        <p id="u-id" class="text-gray-500 text-sm mb-6">ID: 00000000</p>
+                        <div class="flex flex-col gap-3">
+                            <button class="w-full bg-accent/10 text-accent py-3 rounded-xl font-bold border border-accent/20">Edit Profile</button>
+                            <button onclick="location.reload()" class="w-full bg-red-500/10 text-red-400 py-3 rounded-xl font-bold border border-red-500/20">Logout</button>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="glass p-8 rounded-[40px]">
+                            <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                                <i class="fas fa-server text-primary"></i> Server Kamu
+                            </h3>
+                            <div id="u-guilds" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="privacy" class="px-6 max-w-4xl mx-auto pb-20">
-        <h2 class="text-4xl font-extrabold mb-8">Privacy Policy</h2>
-        <div class="glass p-8 rounded-3xl text-gray-400 leading-loose">
-            <h3 class="text-white font-bold text-xl mb-4">Data Yang Kami Kumpulkan</h3>
-            <p class="mb-6">Privasi Anda penting bagi kami. Kami hanya mengumpulkan data publik dari Discord seperti Username, User ID, dan Server ID untuk memfungsikan fitur bot. Kami tidak merekam isi pesan chat kecuali jika perintah spesifik AI dijalankan.</p>
-            
-            <h3 class="text-white font-bold text-xl mb-4">Penggunaan Data</h3>
-            <p class="mb-6">Data digunakan semata-mata untuk personalisasi pengalaman Anda dan keamanan sistem kami dari penyalahgunaan. Kami tidak akan pernah menjual data Anda ke pihak ketiga manapun.</p>
-            
-            <h3 class="text-white font-bold text-xl mb-4">Keamanan</h3>
-            <p>Kami menggunakan enkripsi standar industri untuk melindungi data yang dikirimkan kepada kami.</p>
+    <section id="tos" class="px-6 pb-20">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass p-12 rounded-[50px] border-t-4 border-blue-500 shadow-blue-500/10 shadow-2xl">
+                <h2 class="text-5xl font-black mb-10 gradient-text">Terms of Service 📜</h2>
+                <div class="space-y-8 text-gray-400 leading-relaxed overflow-y-auto max-h-[600px] pr-4">
+                    <div>
+                        <h4 class="text-white font-bold text-xl mb-3">1. Pendahuluan 👋</h4>
+                        <p>Selamat datang di ElhakimAI! Dengan menggunakan bot atau layanan web kami, Anda secara otomatis menyetujui perjanjian hukum ini. Harap baca dengan seksama karena ini menyangkut hak dan kewajiban Anda.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-xl mb-3">2. Batasan Penggunaan 🚫</h4>
+                        <p>Dilarang keras menggunakan ElhakimAI untuk kegiatan ilegal termasuk namun tidak terbatas pada: serangan DDoS, penyebaran malware, pelecehan seksual, rasisme, atau mengeksploitasi celah keamanan bot kami. Pelanggaran akan berakibat pada BANNED PERMANEN dari seluruh ekosistem ElhakimAI.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-xl mb-3">3. Akun & Keamanan 🔐</h4>
+                        <p>Anda bertanggung jawab penuh atas aktivitas yang terjadi melalui akun Discord Anda saat berinteraksi dengan ElhakimAI. Kami tidak bertanggung jawab atas kerugian server akibat kelalaian pengaturan izin (permissions) oleh pemilik server.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-xl mb-3">4. Layanan Premium 💎</h4>
+                        <p>Pembayaran untuk fitur premium bersifat non-refundable (tidak dapat dikembalikan) kecuali terjadi kesalahan teknis dari pihak kami yang menyebabkan layanan tidak dapat digunakan selama lebih dari 7 hari kerja.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-xl mb-3">5. Perubahan Ketentuan 🔄</h4>
+                        <p>ElhakimAI berhak mengubah ToS ini kapan saja tanpa pemberitahuan sebelumnya. Penggunaan berkelanjutan setelah perubahan dianggap sebagai persetujuan terhadap aturan baru.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="contact" class="px-6 flex flex-col items-center justify-center text-center">
-        <div class="glass p-12 rounded-[40px] max-w-2xl w-full border-blue-500/20 shadow-2xl shadow-blue-500/5">
-            <h2 class="text-4xl font-bold mb-4">Hubungi Kami</h2>
-            <p class="text-gray-400 mb-8">Ada pertanyaan atau menemukan bug? Kami siap membantu.</p>
-            <form class="space-y-4" onsubmit="event.preventDefault(); alert('Pesan terkirim! (Simulasi)');">
-                <input type="text" placeholder="Nama Anda" class="w-full glass bg-white/5 p-4 rounded-xl focus:outline-none focus:border-blue-500 transition">
-                <input type="email" placeholder="Email Anda" class="w-full glass bg-white/5 p-4 rounded-xl focus:outline-none focus:border-blue-500 transition">
-                <textarea placeholder="Pesan Anda" rows="4" class="w-full glass bg-white/5 p-4 rounded-xl focus:outline-none focus:border-blue-500 transition"></textarea>
-                <button type="submit" class="btn-primary w-full py-4 rounded-xl font-bold">Kirim Pesan</button>
-            </form>
+    <section id="privacy" class="px-6 pb-20">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass p-12 rounded-[50px] border-t-4 border-purple-500">
+                <h2 class="text-5xl font-black mb-10 gradient-text">Privacy Policy 🔒</h2>
+                <div class="space-y-8 text-gray-400 leading-relaxed">
+                    <p class="text-lg italic">"Data Anda adalah milik Anda. Kami hanya meminjamnya untuk memberikan layanan terbaik."</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white/5 p-6 rounded-3xl border border-white/10">
+                            <h4 class="text-white font-bold mb-2">Apa yang kami simpan? 📥</h4>
+                            <ul class="text-sm space-y-2">
+                                <li>• User ID & Server ID Discord</li>
+                                <li>• Email (untuk notifikasi premium)</li>
+                                <li>• Pengaturan konfigurasi bot</li>
+                                <li>• Log perintah (dihapus per 30 hari)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/5 p-6 rounded-3xl border border-white/10">
+                            <h4 class="text-white font-bold mb-2">Apa yang TIDAK kami simpan? ❌</h4>
+                            <ul class="text-sm space-y-2">
+                                <li>• Password Discord Anda</li>
+                                <li>• Isi pesan pribadi (DM) Anda</li>
+                                <li>• Data perbankan/kartu kredit</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p>Kami menggunakan enkripsi AES-256 untuk melindungi database kami. Kami tidak akan pernah menjual data Anda kepada broker iklan atau pihak ketiga manapun. Kami membenci spam sama seperti Anda!</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer class="glass border-t-0 py-10 px-6 text-center">
-        <p class="text-gray-500 text-sm mb-2">&copy; 2024 ElhakimAI Development Team. All Rights Reserved.</p>
-        <div class="flex justify-center gap-6 text-xl text-gray-400">
-            <i class="fab fa-discord hover:text-blue-400 cursor-pointer"></i>
-            <i class="fab fa-twitter hover:text-blue-400 cursor-pointer"></i>
-            <i class="fab fa-github hover:text-white cursor-pointer"></i>
+    <section id="contact" class="px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="text-6xl font-black mb-12">BUTUH <span class="text-blue-500">BANTUAN?</span> 🚀</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <a href="mailto:support@elhakimai.com" class="glass p-10 rounded-[40px] hover:scale-105 transition block">
+                    <i class="fas fa-envelope text-4xl text-red-400 mb-6"></i>
+                    <h4 class="text-xl font-bold">Email Support</h4>
+                    <p class="text-gray-500 mt-2">Balasan dalam 24 Jam</p>
+                </a>
+                <a href="#" class="glass p-10 rounded-[40px] hover:scale-105 transition block">
+                    <i class="fab fa-discord text-4xl text-[#5865F2] mb-6"></i>
+                    <h4 class="text-xl font-bold">Support Server</h4>
+                    <p class="text-gray-500 mt-2">Komunitas & Developer</p>
+                </a>
+                <a href="#" class="glass p-10 rounded-[40px] hover:scale-105 transition block">
+                    <i class="fab fa-instagram text-4xl text-pink-500 mb-6"></i>
+                    <h4 class="text-xl font-bold">Instagram</h4>
+                    <p class="text-gray-500 mt-2">Update & Info Terbaru</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="mt-20 py-10 px-6 border-t border-white/10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center font-bold">E</div>
+                <span class="text-xl font-bold">ElhakimAI</span>
+            </div>
+            <p class="text-gray-500 text-sm">© 2026 ElhakimAI Inc. Crafted with ❤️ in Indonesia.</p>
+            <div class="flex gap-4">
+                <i class="fab fa-github text-xl hover:text-white cursor-pointer"></i>
+                <i class="fab fa-youtube text-xl hover:text-red-500 cursor-pointer"></i>
+            </div>
         </div>
     </footer>
 
     <script>
-        // KONFIGURASI DISCORD (Ganti CLIENT_ID dengan milikmu!)
-        const CLIENT_ID = 'YOUR_DISCORD_CLIENT_ID'; 
+        /* --- CORE LOGIC --- */
+        const CLIENT_ID = '1476115832517034026'; // WAJIB DIGANTI! ⚠️
         const REDIRECT_URI = window.location.origin + '/';
 
         function showSection(id) {
@@ -200,52 +381,50 @@
         }
 
         function loginDiscord() {
-            // Implicit Flow: Lebih aman untuk aplikasi 1 file tanpa backend
-            const scope = encodeURIComponent('identify guilds');
+            const scope = encodeURIComponent('identify guilds email');
             const url = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${scope}`;
             window.location.href = url;
         }
 
-        // Cek Token di URL setelah login
         window.onload = () => {
             const fragment = new URLSearchParams(window.location.hash.slice(1));
-            const accessToken = fragment.get('access_token');
+            const token = fragment.get('access_token');
 
-            if (accessToken) {
-                fetchUserData(accessToken);
-                // Bersihkan URL agar token tidak terlihat
+            if (token) {
+                processLogin(token);
                 window.history.replaceState({}, document.title, "/");
             }
         };
 
-        async function fetchUserData(token) {
+        async function processLogin(token) {
             try {
-                const response = await fetch('https://discord.com/api/users/@me', {
+                // Get User Data
+                const userRes = await fetch('https://discord.com/api/users/@me', {
                     headers: { Authorization: `Bearer ${token}` }
                 });
-                const user = await response.json();
+                const user = await userRes.json();
+
+                // Update UI Profile
+                document.getElementById('auth-btn-container').innerHTML = `
+                    <div class="flex items-center gap-3 bg-white/5 p-2 pr-6 rounded-full border border-white/10">
+                        <img src="https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png" class="w-10 h-10 rounded-full border border-accent">
+                        <span class="font-bold text-sm">${user.username}</span>
+                    </div>
+                `;
+
+                document.getElementById('u-avatar').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+                document.getElementById('u-name').innerText = user.username;
+                document.getElementById('u-id').innerText = `ID: ${user.id}`;
+
+                document.getElementById('dash-guest').classList.add('hidden');
+                document.getElementById('dash-user').classList.remove('hidden');
                 
-                // Update UI Profil
-                document.getElementById('auth-area').innerHTML = `
-                    <div class="flex items-center gap-3 glass py-1.5 px-4 rounded-full border-blue-500/30">
-                        <img src="https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png" class="w-8 h-8 rounded-full border border-blue-400">
-                        <span class="font-bold text-sm text-blue-100">${user.username}</span>
-                        <button onclick="location.reload()" class="text-gray-500 hover:text-red-400"><i class="fas fa-sign-out-alt"></i></button>
-                    </div>
-                `;
-
-                document.getElementById('user-profile').innerHTML = `
-                    <img src="https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png" class="w-24 h-24 rounded-full border-4 border-blue-500/50 shadow-xl shadow-blue-500/20">
-                    <div class="text-center md:text-left">
-                        <h2 class="text-3xl font-black mb-1">Selamat Datang, ${user.username}!</h2>
-                        <p class="text-gray-400">User ID: ${user.id} • Paket: <span class="text-blue-400 font-bold underline">Premium AI Plan</span></p>
-                    </div>
-                `;
-
                 showSection('dashboard');
                 fetchGuilds(token);
-            } catch (e) {
-                console.error("Gagal ambil data user", e);
+
+            } catch (err) {
+                console.error("Login Failed!", err);
+                alert("Gagal mengambil data Discord! Periksa Client ID.");
             }
         }
 
@@ -254,17 +433,24 @@
                 headers: { Authorization: `Bearer ${token}` }
             });
             const guilds = await res.json();
-            const list = document.getElementById('guilds-list');
-            list.innerHTML = guilds.slice(0, 5).map(g => `
-                <div class="flex items-center justify-between p-4 glass bg-white/5 rounded-2xl hover:bg-white/10 transition">
-                    <div class="flex items-center gap-4">
-                        ${g.icon ? `<img src="https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png" class="w-10 h-10 rounded-xl">` : `<div class="w-10 h-10 bg-gray-700 rounded-xl flex items-center justify-center font-bold">${g.name[0]}</div>`}
-                        <span class="font-bold">${g.name}</span>
+            const list = document.getElementById('u-guilds');
+            
+            // Tampilkan hanya server di mana user punya izin MANAGE_GUILD
+            const myServers = guilds.filter(g => (g.permissions & 0x20) === 0x20);
+
+            list.innerHTML = myServers.map(g => `
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/5 hover:border-primary transition">
+                    <div class="flex items-center gap-3">
+                        ${g.icon ? `<img src="https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png" class="w-12 h-12 rounded-xl">` : `<div class="w-12 h-12 bg-gray-700 rounded-xl flex items-center justify-center">${g.name[0]}</div>`}
+                        <div class="font-bold text-sm truncate w-32">${g.name}</div>
                     </div>
-                    <button onclick="inviteBot()" class="text-xs bg-blue-600/20 text-blue-400 px-3 py-1.5 rounded-lg border border-blue-500/30 hover:bg-blue-600 hover:text-white transition">Kelola</button>
+                    <button onclick="inviteBot()" class="text-[10px] font-black bg-primary px-3 py-2 rounded-lg uppercase tracking-tighter">Setup Bot</button>
                 </div>
             `).join('');
         }
+
+        // GSAP Intro Animations
+        gsap.from(".nav-logo", { duration: 1, y: -50, opacity: 0, ease: "bounce" });
     </script>
 </body>
 </html>
