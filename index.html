@@ -3,317 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ElhakimAI | Command Center</title>
+    <title>ElhakimAI | System Maintenance</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: '#6366f1',
-                        accent: '#22d3ee',
-                        darkbg: '#030305',
-                        cardbg: '#0a0a0f'
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    
     <style>
-        body { background: #030305; color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-        .glass { background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .btn-glow:hover { box-shadow: 0 0 20px rgba(99, 102, 241, 0.4); transform: translateY(-2px); }
-        
-        section { display: none; opacity: 0; transform: scale(0.98); transition: all 0.5s ease; }
-        section.active { display: block; opacity: 1; transform: scale(1); }
+        body { 
+            background-color: #020204; 
+            color: #f8fafc; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden;
+        }
 
-        .lock-overlay { background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
+        /* Animasi Glitch Lembut */
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
         
-        /* Skeleton Loading */
-        .skeleton { background: linear-gradient(90deg, #0a0a0f 25%, #1a1a25 50%, #0a0a0f 75%); background-size: 200% 100%; animation: loading 1.5s infinite; }
-        @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        /* Bar Progress Animasi Shimmer */
+        .shimmer-bar {
+            background: linear-gradient(90deg, #4f46e5 0%, #a855f7 50%, #4f46e5 100%);
+            background-size: 200% auto;
+            animation: move-shimmer 2s linear infinite;
+        }
+
+        @keyframes move-shimmer {
+            to { background-position: 200% center; }
+        }
+
+        /* Glow Effects */
+        .glow-circle {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .gear-spin { animation: spin 8s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Floating Animation */
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
     </style>
 </head>
-<body>
+<body class="flex items-center justify-center min-h-screen p-6">
 
-    <nav class="fixed top-0 w-full z-[100] glass border-b border-white/5 h-20 px-6">
-        <div class="max-w-7xl mx-auto h-full flex justify-between items-center">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="navigate('home')">
-                <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center shadow-lg shadow-brand/20">
-                    <i class="fas fa-robot text-white text-xl"></i>
-                </div>
-                <span class="text-xl font-extrabold tracking-tighter uppercase">Elhakim<span class="text-accent italic">AI</span></span>
-            </div>
+    <div class="glow-circle top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="fixed top-0 left-0 w-full h-full opacity-10 pointer-events-none" style="background-image: radial-gradient(#4f46e5 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
 
-            <div id="auth-area">
-                <button onclick="loginDiscord()" class="bg-white text-black px-6 py-2.5 rounded-xl font-bold text-sm btn-glow flex items-center gap-2 transition-all">
-                    <i class="fab fa-discord"></i> Hubungkan Akun
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <section id="home" class="active pt-48 px-6 text-center">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-5xl md:text-8xl font-black mb-6 tracking-tighter leading-none">Automasi Tanpa <br><span class="text-brand">Batas.</span></h1>
-            <p class="text-gray-400 text-lg md:text-xl mb-12">Satu platform untuk mengelola ribuan komunitas dengan kecerdasan buatan.</p>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
-                <div class="glass p-6 rounded-3xl">
-                    <h4 id="stat-servers" class="text-3xl font-black text-brand">--</h4>
-                    <p class="text-[10px] uppercase font-bold tracking-widest text-gray-500">Servers</p>
-                </div>
-                <div class="glass p-6 rounded-3xl">
-                    <h4 id="stat-users" class="text-3xl font-black text-accent">--</h4>
-                    <p class="text-[10px] uppercase font-bold tracking-widest text-gray-500">Total Users</p>
-                </div>
-                <div class="glass p-6 rounded-3xl">
-                    <h4 class="text-3xl font-black">99.9<span class="text-sm">%</span></h4>
-                    <p class="text-[10px] uppercase font-bold tracking-widest text-gray-500">Uptime</p>
-                </div>
-                <div class="glass p-6 rounded-3xl">
-                    <h4 class="text-3xl font-black">24/7</h4>
-                    <p class="text-[10px] uppercase font-bold tracking-widest text-gray-500">Support</p>
-                </div>
-            </div>
-
-            <div class="flex flex-wrap justify-center gap-4">
-                <button onclick="inviteBot()" class="bg-brand px-12 py-5 rounded-2xl font-black text-lg btn-glow">Add to Discord</button>
-                <button onclick="navigate('dashboard')" class="glass px-12 py-5 rounded-2xl font-black text-lg hover:bg-white/5 transition-all">Buka Dashboard</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="dashboard" class="pt-32 px-6 pb-20">
-        <div class="max-w-7xl mx-auto">
-            <div id="dash-guest" class="glass p-20 rounded-[40px] text-center">
-                <i class="fas fa-shield-alt text-6xl text-gray-800 mb-6"></i>
-                <h2 class="text-3xl font-black mb-4">Akses Terkunci</h2>
-                <p class="text-gray-500 mb-10">Kamu harus login untuk melihat server yang kamu kelola.</p>
-                <button onclick="loginDiscord()" class="bg-brand px-10 py-4 rounded-2xl font-black btn-glow">Login with Discord</button>
-            </div>
-
-            <div id="dash-main" class="hidden">
-                <div class="flex items-center gap-6 mb-12 bg-white/5 p-6 rounded-[30px] border border-white/5">
-                    <img id="u-avatar" class="w-16 h-16 rounded-2xl">
-                    <div>
-                        <h2 class="text-2xl font-black tracking-tight uppercase" id="u-name">--</h2>
-                        <span class="text-[10px] font-mono text-brand font-bold uppercase tracking-widest">Authorized Member</span>
-                    </div>
-                </div>
-
-                <div class="flex justify-between items-center mb-8">
-                    <h3 class="text-xl font-black tracking-tight uppercase"><i class="fas fa-server mr-2 text-brand"></i> Server List</h3>
-                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Menampilkan server dengan akses Admin</p>
-                </div>
-
-                <div id="guild-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="config-panel" class="pt-32 px-6 pb-20">
-        <div class="max-w-5xl mx-auto">
-            <div class="flex items-center justify-between mb-10">
-                <button onclick="navigate('dashboard')" class="text-gray-500 hover:text-white transition font-bold flex items-center gap-2">
-                    <i class="fas fa-arrow-left"></i> Kembali
-                </button>
-                <div class="flex items-center gap-3">
-                    <div id="cfg-icon" class="w-10 h-10 rounded-lg"></div>
-                    <h2 id="cfg-name" class="font-black text-xl">--</h2>
-                </div>
-            </div>
-
-            <div class="grid lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="glass p-8 rounded-[35px]">
-                        <h3 class="font-black text-lg mb-6 uppercase tracking-widest text-brand">General Settings</h3>
-                        <div class="space-y-6">
-                            <div class="flex items-center justify-between border-b border-white/5 pb-4">
-                                <div><h4 class="font-bold">Bot Prefix</h4><p class="text-xs text-gray-500">Simbol pemicu perintah.</p></div>
-                                <input type="text" value="!" class="bg-darkbg border border-white/10 p-2 rounded-lg w-16 text-center font-bold text-brand focus:border-brand outline-none">
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div><h4 class="font-bold">AI Chatbot</h4><p class="text-xs text-gray-500">Izinkan AI merespons chat.</p></div>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" checked class="sr-only peer">
-                                    <div class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:bg-brand after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass p-8 rounded-[35px] h-fit">
-                    <h3 class="font-black text-lg mb-4 uppercase text-accent">Server Status</h3>
-                    <div class="space-y-4 text-sm">
-                        <div class="flex justify-between"><span class="text-gray-500">Bot Connection</span><span class="text-green-500 font-bold">Excellent</span></div>
-                        <div class="flex justify-between"><span class="text-gray-500">Latency</span><span class="text-gray-300">12ms</span></div>
-                    </div>
-                    <button class="w-full mt-8 bg-brand py-4 rounded-2xl font-black uppercase text-xs tracking-widest shadow-lg shadow-brand/20">Simpan Perubahan</button>
+    <div class="max-w-3xl w-full text-center relative z-10">
+        
+        <div class="mb-8 flex justify-center">
+            <div class="relative w-24 h-24 bg-indigo-600/10 rounded-[30px] flex items-center justify-center border border-indigo-500/20 floating">
+                <i class="fas fa-robot text-4xl text-indigo-500"></i>
+                <div class="absolute -top-2 -right-2 w-8 h-8 bg-black border border-indigo-500/30 rounded-full flex items-center justify-center">
+                    <i class="fas fa-wrench text-xs text-indigo-400 gear-spin"></i>
                 </div>
             </div>
         </div>
-    </section>
 
-    <section id="legal" class="pt-32 px-6 pb-20">
-        <div class="max-w-4xl mx-auto space-y-10">
-            <div class="glass p-10 rounded-[40px]">
-                <h2 class="text-3xl font-black mb-6">Terms of Service</h2>
-                <div class="text-gray-400 text-sm space-y-4 leading-relaxed">
-                    <p>1. <strong>Penggunaan:</strong> ElhakimAI harus digunakan sesuai aturan Discord. Kami tidak bertanggung jawab atas penyalahgunaan fitur oleh user.</p>
-                    <p>2. <strong>Donasi:</strong> Transaksi untuk fitur premium tidak dapat dikembalikan.</p>
-                </div>
+        <div class="inline-flex items-center gap-2 bg-indigo-500/5 border border-indigo-500/20 px-5 py-2 rounded-full mb-6">
+            <span class="flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-indigo-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+            </span>
+            <span class="text-[10px] font-black tracking-[0.3em] uppercase text-indigo-400">System Integration v5.0</span>
+        </div>
+
+        <h1 class="text-4xl md:text-7xl font-black mb-6 tracking-tighter leading-none italic uppercase">
+            WEBSITE ON <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">MAINTENANCE</span>
+        </h1>
+        
+        <p class="text-gray-400 text-lg mb-10 max-w-lg mx-auto leading-relaxed">
+            Kami sedang membangun ulang sistem <span class="font-mono text-white">Backend di GitHub</span> untuk performa dashboard yang lebih stabil dan cepat.
+        </p>
+
+        <div class="max-w-md mx-auto mb-12">
+            <div class="flex justify-between mb-3 text-[10px] font-bold uppercase tracking-widest text-gray-500 italic">
+                <span>Deploying Code...</span>
+                <span>78% Complete</span>
+            </div>
+            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                <div class="shimmer-bar h-full w-[78%]"></div>
             </div>
         </div>
-    </section>
 
-    <script>
-        // --- ⚙️ CONFIGURATION ---
-        const CLIENT_ID = '1476115832517034026'; 
-        const REDIRECT_URI = window.location.origin + '/';
+        <div class="flex flex-col md:flex-row items-center justify-center gap-5">
+            <a href="https://discord.gg/yourlink" target="_blank" class="w-full md:w-auto bg-indigo-600 hover:bg-indigo-500 text-white px-10 py-4 rounded-2xl font-black transition-all flex items-center justify-center gap-3 shadow-lg shadow-indigo-600/20">
+                <i class="fab fa-discord text-xl"></i> DISCORD SUPPORT
+            </a>
+            <div class="flex gap-3">
+                <a href="#" class="w-14 h-14 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="w-14 h-14 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                    <i class="fab fa-youtube text-xl"></i>
+                </a>
+            </div>
+        </div>
 
-        // --- 📊 STATS LOGIC (SIMULATION) ---
-        // Karena Client-side tidak bisa akses data global bot, 
-        // kita ambil data dari bot public API atau buat angka yang "bertumbuh"
-        function animateStats() {
-            let serverCount = 3; 
-            let userCount = 743;
+        <div class="mt-24 pt-8 border-t border-white/5 opacity-30">
+            <div class="flex flex-col md:flex-row justify-center gap-6 text-[10px] font-mono tracking-widest uppercase italic">
+                <span class="flex items-center gap-2"><i class="fas fa-database text-indigo-500"></i> Linking Database</span>
+                <span class="hidden md:inline">•</span>
+                <span class="flex items-center gap-2"><i class="fab fa-github text-white"></i> Deploying Repositories</span>
+            </div>
+        </div>
+    </div>
 
-            document.getElementById('stat-servers').innerText = serverCount.toLocaleString();
-            document.getElementById('stat-users').innerText = userCount.toLocaleString();
-        }
-
-        // --- 🕹️ NAVIGATION ---
-        function navigate(id) {
-            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            window.scrollTo(0,0);
-        }
-
-        function inviteBot(guildId = null) {
-            let url = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&permissions=8&scope=bot%20applications.commands`;
-            if(guildId) url += `&guild_id=${guildId}&disable_guild_select=true`;
-            window.open(url, '_blank');
-        }
-
-        function loginDiscord() {
-            const scope = encodeURIComponent('identify guilds');
-            const url = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${scope}`;
-            window.location.href = url;
-        }
-
-        // --- 🔐 SESSION HANDLING ---
-        window.onload = () => {
-            animateStats();
-            const hash = new URLSearchParams(window.location.hash.slice(1));
-            const token = hash.get('access_token');
-            if (token) {
-                initUser(token);
-                window.history.replaceState({}, document.title, "/");
-            }
-        }
-
-        async function initUser(token) {
-            try {
-                const uRes = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } });
-                const user = await uRes.json();
-                const gRes = await fetch('https://discord.com/api/users/@me/guilds', { headers: { Authorization: `Bearer ${token}` } });
-                const guilds = await gRes.json();
-
-                updateUI(user);
-                renderGuildList(guilds);
-                navigate('dashboard');
-            } catch (err) { console.error(err); }
-        }
-
-        function updateUI(user) {
-            document.getElementById('auth-area').innerHTML = `
-                <div class="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-xl border border-white/10">
-                    <img src="https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png" class="w-7 h-7 rounded-lg">
-                    <span class="text-xs font-bold">${user.username}</span>
-                </div>
-            `;
-            document.getElementById('u-avatar').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
-            document.getElementById('u-name').innerText = user.username;
-            document.getElementById('u-id').innerText = `ID: ${user.id}`;
-            document.getElementById('dash-guest').classList.add('hidden');
-            document.getElementById('dash-main').classList.remove('hidden');
-        }
-
-        function renderGuildList(guilds) {
-            const adminGuilds = guilds.filter(g => (g.permissions & 0x8) === 0x8);
-            const list = document.getElementById('guild-list');
-            
-            // SIMULASI CEK BOT: Dalam dashboard nyata, frontend akan menanyakan ke backend bot
-            // "Apakah bot ElhakimAI ada di server ID ini?". 
-            // Disini kita akan mensimulasikan beberapa server sudah ada bot, beberapa belum.
-
-            list.innerHTML = adminGuilds.map((g, index) => {
-                // Simulasi: Server pertama (index 0) bot sudah ada, yang lain belum
-                const hasBot = index === 0; 
-
-                return `
-                <div class="glass p-6 rounded-[35px] border-white/5 transition-all group flex flex-col justify-between h-56 relative overflow-hidden">
-                    <div class="flex items-center gap-4">
-                        ${g.icon 
-                            ? `<img src="https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png" class="w-14 h-14 rounded-2xl">`
-                            : `<div class="w-14 h-14 bg-brand/20 rounded-2xl flex items-center justify-center font-bold text-brand">${g.name[0]}</div>`
-                        }
-                        <div class="overflow-hidden">
-                            <h4 class="font-bold truncate text-white">${g.name}</h4>
-                            <div class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full ${hasBot ? 'bg-green-500' : 'bg-red-500 animate-pulse'}"></span>
-                                <span class="text-[9px] font-black uppercase tracking-widest text-gray-500">
-                                    ${hasBot ? 'Bot Connected' : 'Bot Missing'}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 gap-2 mt-4">
-                        ${hasBot ? `
-                            <button onclick="openConfig('${g.name}', '${g.id}', '${g.icon}')" class="bg-brand py-3 rounded-xl font-black text-[10px] uppercase tracking-widest shadow-lg shadow-brand/20 transition hover:scale-105">
-                                <i class="fas fa-sliders-h mr-1"></i> Open Dashboard
-                            </button>
-                        ` : `
-                            <button onclick="inviteBot('${g.id}')" class="bg-white text-black py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition hover:bg-brand hover:text-white">
-                                <i class="fas fa-plus mr-1"></i> Add Bot to Access Dash
-                            </button>
-                        `}
-                    </div>
-
-                    ${!hasBot ? `
-                        <div class="absolute inset-0 lock-overlay flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                            <div class="text-center p-4">
-                                <i class="fas fa-lock mb-2 text-brand"></i>
-                                <p class="text-[9px] font-bold uppercase tracking-tighter">Bot Required for this server</p>
-                            </div>
-                        </div>
-                    ` : ''}
-                </div>
-                `;
-            }).join('');
-        }
-
-        function openConfig(name, id, icon) {
-            document.getElementById('cfg-name').innerText = name;
-            const iconDiv = document.getElementById('cfg-icon');
-            if(icon !== 'null') {
-                iconDiv.innerHTML = `<img src="https://cdn.discordapp.com/icons/${id}/${icon}.png" class="w-full h-full rounded-lg">`;
-            } else {
-                iconDiv.className = "w-10 h-10 bg-brand rounded-lg flex items-center justify-center font-bold";
-                iconDiv.innerText = name[0];
-            }
-            navigate('config-panel');
-        }
-    </script>
 </body>
 </html>
