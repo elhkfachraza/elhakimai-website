@@ -1,23 +1,33 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ElhakimAI | Powered by Empire of Elhakim</title>
+    <title>ELHAKIM AI | Imperial Digital Supremacy 2026</title>
     
+    <meta name="description" content="Satu-satunya AI yang didukung oleh kekuatan Empire of Elhakim. Mengelola jutaan data, ribuan server, dan keamanan mutlak.">
+    <meta property="og:image" content="https://img.icons8.com/fluency/100/crown.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Plus+Jakarta+Sans:wght@300;500;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
+                        imperial: '#7000FF',
+                        cyber: '#00D1FF',
                         gold: '#FFD700',
-                        royal: '#1a1a2e',
-                        empire: '#7000FF'
+                        deep: '#020205'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        tech: ['Orbitron', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     }
                 }
             }
@@ -25,243 +35,255 @@
     </script>
 
     <style>
-        :root { --accent: #7000FF; }
-        body { 
-            background: #020205; 
-            color: #e0e0e0; 
-            font-family: 'Space Grotesk', sans-serif;
-            overflow-x: hidden;
-        }
-        .font-empire { font-family: 'Cinzel', serif; }
-
-        /* Ultra Premium Background */
-        .stars-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #110022 0%, #020205 100%);
-            z-index: -1;
+        body { background: #020205; color: #f0f0f0; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(112, 0, 255, 0.15); }
+        .text-glow { text-shadow: 0 0 15px rgba(112, 0, 255, 0.6); }
+        .cyber-grid {
+            background-image: linear-gradient(rgba(112, 0, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(112, 0, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(112, 0, 255, 0.2);
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
-        }
+        /* Nav Link Hover */
+        .nav-link { position: relative; transition: 0.3s; }
+        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #00D1FF; transition: 0.3s; }
+        .nav-link:hover::after { width: 100%; }
 
-        .imperial-btn {
-            background: linear-gradient(45deg, #7000FF, #00D1FF);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .imperial-btn:hover {
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 0 30px rgba(112, 0, 255, 0.6);
-        }
-
-        section { display: none; min-height: 100vh; padding-top: 120px; }
-        section.active { display: block; animation: imperialFade 0.8s ease-out; }
-
-        @keyframes imperialFade {
-            from { opacity: 0; filter: blur(10px); transform: scale(0.95); }
-            to { opacity: 1; filter: blur(0); transform: scale(1); }
-        }
-
-        .glow-text { text-shadow: 0 0 10px rgba(112, 0, 255, 0.8); }
-        
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #020205; }
         ::-webkit-scrollbar-thumb { background: #7000FF; border-radius: 10px; }
+
+        section { display: none; opacity: 0; }
+        section.active { display: block; opacity: 1; }
+
+        .imperial-gradient { background: linear-gradient(135deg, #7000FF 0%, #00D1FF 100%); }
+        .card-hover:hover { transform: translateY(-10px); border-color: #00D1FF; box-shadow: 0 0 30px rgba(0, 209, 255, 0.2); }
     </style>
 </head>
-<body>
+<body class="cyber-grid font-sans">
 
-    <div class="stars-container"></div>
+    <div class="fixed inset-0 z-[-1]">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-imperial/10 blur-[150px] rounded-full"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyber/10 blur-[150px] rounded-full"></div>
+    </div>
 
-    <nav class="fixed top-0 w-full z-[100] p-6">
-        <div class="max-w-7xl mx-auto glass-card rounded-3xl px-8 py-4 flex justify-between items-center border-b-2 border-empire/30">
-            <div class="flex items-center gap-4 cursor-pointer" onclick="showPage('home')">
-                <img src="https://img.icons8.com/fluency/48/crown.png" class="w-10 h-10 animate-bounce">
-                <span class="font-empire text-2xl tracking-widest gold-gradient glow-text">ELHAKIM AI</span>
+    <nav class="fixed top-0 w-full z-[1000] px-6 py-4">
+        <div class="max-w-7xl mx-auto glass rounded-full px-8 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="navigate('home')">
+                <div class="w-10 h-10 imperial-gradient rounded-xl flex items-center justify-center rotate-3 group-hover:rotate-0 transition-all">
+                    <i class="fas fa-crown text-black"></i>
+                </div>
+                <span class="font-tech font-black tracking-tighter text-xl text-glow italic">ELHAKIM<span class="text-cyber">AI</span></span>
             </div>
 
-            <div class="hidden md:flex gap-8 items-center text-xs font-bold tracking-[0.3em] uppercase">
-                <a href="#" onclick="showPage('home')" class="hover:text-empire transition">Home</a>
-                <a href="#" onclick="showPage('fitur')" class="hover:text-empire transition">Features</a>
-                <a href="#" onclick="showPage('dashboard')" class="hover:text-empire transition">Empire Stats</a>
-                <a href="#" onclick="showPage('legal')" class="hover:text-empire transition">Law</a>
+            <div class="hidden lg:flex items-center gap-8 font-bold text-[10px] uppercase tracking-[0.3em] text-gray-400">
+                <button onclick="navigate('home')" class="nav-link hover:text-white">Portal</button>
+                <button onclick="navigate('fitur')" class="nav-link hover:text-white">Features</button>
+                <button onclick="navigate('dashboard')" class="nav-link hover:text-white">Dashboard</button>
+                <button onclick="navigate('tos')" class="nav-link hover:text-white">TOS</button>
+                <button onclick="navigate('privacy')" class="nav-link hover:text-white">Privacy</button>
+                <button onclick="navigate('contact')" class="nav-link hover:text-white">Contact</button>
             </div>
 
-            <div id="auth-section">
-                <button onclick="loginDiscord()" class="imperial-btn px-6 py-2.5 rounded-xl font-black text-sm flex items-center gap-2">
-                    <i class="fab fa-discord"></i> AUTHENTICATE
+            <div id="auth-status">
+                <button onclick="loginDiscord()" class="bg-white text-black px-6 py-2 rounded-full font-black text-xs hover:bg-cyber transition-all active:scale-95 flex items-center gap-2">
+                    <i class="fab fa-discord"></i> SYNC ACCESS
                 </button>
             </div>
         </div>
     </nav>
 
-    <section id="home" class="active flex flex-col items-center justify-center text-center px-6">
-        <h2 class="font-empire text-empire tracking-[0.5em] mb-4 text-sm md:text-base">MCMXXVI • EMPIRE OF ELHAKIM</h2>
-        <h1 class="text-6xl md:text-9xl font-black mb-8 tracking-tighter leading-none">
-            THE SUPREME <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-empire uppercase">Artificial Intelligence</span>
-        </h1>
-        <p class="text-gray-400 text-lg md:text-2xl max-w-4xl mb-12 font-light italic">
-            "Satu-satunya AI yang didukung oleh kekuatan Empire. Mengelola jutaan data, ribuan server, dan keamanan mutlak tanpa kompromi."
-        </p>
-        
-        <div class="flex flex-wrap justify-center gap-8">
-            <button onclick="inviteBot()" class="imperial-btn px-12 py-5 rounded-2xl font-black text-xl">INVITE SUPREME BOT</button>
-            <a href="https://discord.gg/yourserver" target="_blank" class="glass-card px-12 py-5 rounded-2xl font-black text-xl hover:bg-white/5 transition flex items-center gap-3 border border-white/10">
-                <i class="fab fa-discord text-blue-400"></i> JOIN EMPIRE
-            </a>
-        </div>
-
-        <div class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl w-full">
-            <div class="glass-card p-10 rounded-[40px] border-t-2 border-empire">
-                <div class="text-gray-500 font-bold uppercase tracking-widest text-xs mb-2">Total Imperial Users</div>
-                <div id="stat-users" class="text-5xl font-black text-white">1,240,582</div>
-            </div>
-            <div class="glass-card p-10 rounded-[40px] border-t-2 border-blue-500">
-                <div class="text-gray-500 font-bold uppercase tracking-widest text-xs mb-2">Active Server Dominance</div>
-                <div id="stat-servers" class="text-5xl font-black text-white">42,891</div>
-            </div>
-            <div class="glass-card p-10 rounded-[40px] border-t-2 border-green-500">
-                <div class="text-gray-500 font-bold uppercase tracking-widest text-xs mb-2">AI Neural Processed</div>
-                <div id="stat-tasks" class="text-5xl font-black text-white">99M+</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="fitur" class="px-6 pb-20">
+    <section id="home" class="active pt-40 px-6 min-h-screen">
         <div class="max-w-7xl mx-auto text-center">
-            <h2 class="font-empire text-4xl mb-20 glow-text">IMPERIAL TECHNOLOGY</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass-card p-8 rounded-3xl hover:border-empire transition">
-                    <i class="fas fa-microchip text-4xl text-empire mb-6"></i>
-                    <h3 class="text-xl font-bold mb-4">Core 2026 Engine</h3>
-                    <p class="text-sm text-gray-500">Model bahasa Quantum yang dilatih khusus oleh Empire of Elhakim untuk akurasi 100%.</p>
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 glass rounded-full text-[10px] font-mono text-cyber mb-8 tracking-[0.2em] uppercase">
+                <span class="w-2 h-2 bg-cyber rounded-full animate-ping"></span>
+                Imperial System v3.0 Online
+            </div>
+            <h1 class="font-tech text-6xl md:text-9xl font-black mb-6 leading-none tracking-tighter">
+                EMPIRE OF <br> <span class="text-transparent bg-clip-text imperial-gradient">ELHAKIM</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-2xl max-w-3xl mx-auto mb-12 font-light italic">
+                Satu Bot untuk mendominasi segalanya. Rasakan kekuatan kecerdasan buatan tingkat kaisar di server Discord Anda. 👑
+            </p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <button onclick="inviteBot()" class="imperial-gradient px-12 py-5 rounded-2xl font-black text-lg text-black hover:shadow-[0_0_40px_rgba(112,0,255,0.4)] transition-all">
+                    INVITE SUPREME BOT
+                </button>
+                <a href="https://discord.gg/your-empire" target="_blank" class="glass px-12 py-5 rounded-2xl font-black text-lg flex items-center gap-3 hover:bg-white/5 transition-all">
+                    <i class="fab fa-discord"></i> SUPPORT SERVER
+                </a>
+            </div>
+
+            <div class="mt-24 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
+                <div class="glass p-8 rounded-3xl">
+                    <div class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">Total Users</div>
+                    <div class="text-4xl font-black text-white" id="stat-u">1,240,582</div>
                 </div>
-                <div class="glass-card p-8 rounded-3xl hover:border-empire transition">
-                    <i class="fas fa-user-shield text-4xl text-empire mb-6"></i>
-                    <h3 class="text-xl font-bold mb-4">Empire Security</h3>
-                    <p class="text-sm text-gray-500">Sistem keamanan tingkat militer yang menjaga data dari setiap member di seluruh server.</p>
+                <div class="glass p-8 rounded-3xl">
+                    <div class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">Servers</div>
+                    <div class="text-4xl font-black text-white" id="stat-s">42,891</div>
                 </div>
-                <div class="glass-card p-8 rounded-3xl hover:border-empire transition">
-                    <i class="fas fa-chart-line text-4xl text-empire mb-6"></i>
-                    <h3 class="text-xl font-bold mb-4">Deep Analytics</h3>
-                    <p class="text-sm text-gray-500">Pantau pertumbuhan server Anda dengan grafik prediktif yang dihasilkan oleh AI.</p>
+                <div class="glass p-8 rounded-3xl">
+                    <div class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">Uptime</div>
+                    <div class="text-4xl font-black text-cyber">99.9%</div>
                 </div>
-                <div class="glass-card p-8 rounded-3xl hover:border-empire transition">
-                    <i class="fas fa-crown text-4xl text-empire mb-6"></i>
-                    <h3 class="text-xl font-bold mb-4">Royalty Support</h3>
-                    <p class="text-sm text-gray-500">Dukungan prioritas 24/7 langsung dari para petinggi Empire of Elhakim.</p>
+                <div class="glass p-8 rounded-3xl">
+                    <div class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">Processing</div>
+                    <div class="text-4xl font-black text-imperial">Quantum</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="dashboard" class="px-6">
-        <div class="max-w-6xl mx-auto">
-            <div id="db-locked" class="glass-card p-20 rounded-[50px] text-center">
-                <i class="fas fa-key text-6xl text-empire mb-8 opacity-20"></i>
-                <h2 class="text-4xl font-black mb-4">AKSES DITOLAK</h2>
-                <p class="text-gray-500 mb-10 font-mono tracking-tighter uppercase text-sm">Hanya warga Empire yang terautentikasi dapat melihat data ini.</p>
-                <button onclick="loginDiscord()" class="imperial-btn px-12 py-4 rounded-2xl font-black">LOGIN VIA DISCORD</button>
+    <section id="fitur" class="pt-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="font-tech text-4xl md:text-5xl font-black mb-4">IMPERIAL FEATURES</h2>
+                <div class="h-1 w-40 imperial-gradient mx-auto"></div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass p-10 rounded-[40px] card-hover transition-all">
+                    <div class="w-16 h-16 bg-imperial/20 rounded-2xl flex items-center justify-center text-3xl text-imperial mb-8">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4">AI Intelligence</h3>
+                    <p class="text-gray-400">Diskusi cerdas, ringkasan chat, hingga asisten coding dengan model terbaru yang mampu memahami bahasa manusia secara alami.</p>
+                </div>
+                <div class="glass p-10 rounded-[40px] card-hover transition-all">
+                    <div class="w-16 h-16 bg-cyber/20 rounded-2xl flex items-center justify-center text-3xl text-cyber mb-8">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4">Anti-Raid Guard</h3>
+                    <p class="text-gray-400">Perlindungan total dari serangan spam dan raid bot. Sistem keamanan Empire kami akan memblokir ancaman dalam 0.1 detik.</p>
+                </div>
+                <div class="glass p-10 rounded-[40px] card-hover transition-all">
+                    <div class="w-16 h-16 bg-gold/20 rounded-2xl flex items-center justify-center text-3xl text-gold mb-8">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4">High-Fi Music</h3>
+                    <p class="text-gray-400">Putar lagu favorit Anda dengan kualitas audio lossless. Mendukung Spotify, SoundCloud, dan YouTube Music.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard" class="pt-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div id="dash-locked" class="glass p-20 rounded-[50px] text-center">
+                <i class="fas fa-lock text-6xl text-gray-800 mb-8"></i>
+                <h2 class="font-tech text-3xl font-black mb-4">IDENTITY REQUIRED</h2>
+                <p class="text-gray-500 mb-10 max-w-md mx-auto italic font-mono uppercase text-xs">Dekripsi data diperlukan untuk mengakses kontrol Imperial.</p>
+                <button onclick="loginDiscord()" class="imperial-gradient px-10 py-4 rounded-2xl font-black text-black">AUTHORIZE VIA DISCORD</button>
             </div>
 
-            <div id="db-content" class="hidden">
-                <div class="grid lg:grid-cols-3 gap-8 mb-10">
-                    <div class="lg:col-span-1 glass-card p-8 rounded-[40px] text-center border-b-4 border-empire">
-                        <img id="u-avatar" class="w-32 h-32 rounded-full mx-auto mb-6 ring-4 ring-empire shadow-2xl">
-                        <h3 id="u-name" class="text-3xl font-black italic">--</h3>
-                        <p id="u-id" class="text-gray-500 text-xs mt-2 font-mono">ID: 000</p>
+            <div id="dash-unlocked" class="hidden">
+                <div class="grid lg:grid-cols-3 gap-8 mb-12">
+                    <div class="glass p-8 rounded-[40px] flex items-center gap-6">
+                        <img id="u-avatar" src="" class="w-24 h-24 rounded-full border-4 border-imperial">
+                        <div>
+                            <h3 id="u-name" class="text-2xl font-black italic">--</h3>
+                            <p id="u-id" class="text-xs font-mono text-gray-500">ID: 000</p>
+                        </div>
                     </div>
-                    <div class="lg:col-span-2 glass-card p-10 rounded-[40px]">
-                        <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                            <i class="fas fa-database text-empire"></i> DATA EKOSISTEM ELHAKIMAI
-                        </h3>
-                        <div class="grid grid-cols-2 gap-6">
-                            <div class="bg-white/5 p-6 rounded-3xl">
-                                <span class="text-xs text-gray-400 block mb-1">DATA USER SERVER ANDA</span>
-                                <span id="u-total-users" class="text-3xl font-black text-blue-400">MEMUAT...</span>
-                            </div>
-                            <div class="bg-white/5 p-6 rounded-3xl">
-                                <span class="text-xs text-gray-400 block mb-1">TOTAL SERVER GLOBAL</span>
-                                <span class="text-3xl font-black text-empire">42,891</span>
-                            </div>
+                    <div class="glass p-8 rounded-[40px] lg:col-span-2">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-black">NEURAL STATUS</h3>
+                            <span class="text-xs font-mono text-cyber">CORE STATUS: OPTIMIZED</span>
+                        </div>
+                        <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden">
+                            <div class="bg-cyber h-full w-[85%] shadow-[0_0_15px_#00D1FF]"></div>
                         </div>
                     </div>
                 </div>
-                <h4 class="text-xl font-black mb-6 uppercase tracking-widest"><i class="fas fa-map mr-2"></i> Server Dominasi Anda</h4>
-                <div id="u-servers" class="grid md:grid-cols-3 gap-6"></div>
+                <div id="u-guilds" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    </div>
             </div>
         </div>
     </section>
 
-    <section id="legal" class="px-6 pb-20">
-        <div class="max-w-4xl mx-auto space-y-12">
-            <div class="glass-card p-12 rounded-[50px]">
-                <h2 class="font-empire text-3xl mb-8 text-empire">IMPERIAL TERMS OF SERVICE</h2>
-                <div class="text-gray-400 text-sm leading-loose h-64 overflow-y-auto pr-4 custom-scroll">
-                    <p class="mb-4">1. Dengan menggunakan ElhakimAI, Anda tunduk pada hukum digital Empire of Elhakim. Anda dilarang melakukan eksploitasi, decompiling, atau modifikasi ilegal pada bot ini.</p>
-                    <p class="mb-4">2. Kami berhak mencabut akses bot dari server manapun yang melanggar kode etik Empire (termasuk spam berlebih, ujaran kebencian, dan konten ilegal).</p>
-                    <p class="mb-4">3. Semua data yang ditarik (User ID, Server ID) digunakan murni untuk operasional bot dan tidak akan pernah diperjualbelikan kepada pihak luar Empire.</p>
-                    <p class="mb-4">4. Kebijakan Premium: Biaya yang dikeluarkan untuk akses fitur elit Empire bersifat final dan digunakan untuk pemeliharaan infrastruktur Quantum Server ElhakimAI.</p>
+    <section id="tos" class="pt-32 px-6">
+        <div class="max-w-4xl mx-auto glass p-12 rounded-[50px]">
+            <h2 class="font-tech text-4xl font-black mb-8 italic text-glow text-cyber underline decoration-imperial">TERMS OF EMPIRE 📜</h2>
+            <div class="space-y-6 text-gray-400 leading-relaxed font-light text-sm">
+                <p>1. <b class="text-white">Penerimaan Ketentuan:</b> Dengan mengundang ElhakimAI ke server Anda, Anda setuju untuk tunduk pada hukum digital Empire of Elhakim.</p>
+                <p>2. <b class="text-white">Penggunaan yang Dilarang:</b> Dilarang menggunakan bot untuk menyebarkan malware, melakukan doxxing, atau segala bentuk aktivitas ilegal lainnya.</p>
+                <p>3. <b class="text-white">Hak Akses:</b> Tim developer ElhakimAI berhak mencabut akses bot jika ditemukan indikasi penyalahgunaan fitur yang merugikan server lain.</p>
+                <p>4. <b class="text-white">Donasi & Premium:</b> Seluruh transaksi fitur premium bersifat final dan digunakan untuk pemeliharaan server pusat kami.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="privacy" class="pt-32 px-6">
+        <div class="max-w-4xl mx-auto glass p-12 rounded-[50px]">
+            <h2 class="font-tech text-4xl font-black mb-8 italic text-glow text-imperial">PRIVACY PROTOCOL 🔒</h2>
+            <div class="space-y-6 text-gray-400 font-light text-sm">
+                <p class="italic mb-6">"Kami percaya bahwa data Anda adalah kedaulatan Anda."</p>
+                <p>• <b class="text-white">Enkripsi Data:</b> Seluruh data User ID dan Server ID yang ditarik oleh ElhakimAI dilindungi oleh enkripsi Quantum-Grade AES-256.</p>
+                <p>• <b class="text-white">Penyimpanan Pesan:</b> ElhakimAI TIDAK menyimpan isi pesan chat Anda kecuali jika fitur logging diaktifkan secara manual oleh pemilik server.</p>
+                <p>• <b class="text-white">Data Pihak Ketiga:</b> Kami menjamin 100% tidak akan pernah menjual atau membagikan data Anda kepada agensi iklan manapun.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="pt-32 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="font-tech text-5xl font-black mb-12">ESTABLISH <span class="text-cyber">SIGNAL</span> 📡</h2>
+            <div class="grid md:grid-cols-2 gap-8 text-left">
+                <div class="glass p-10 rounded-[40px]">
+                    <h3 class="text-2xl font-black mb-6 italic">Send Message</h3>
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Signal Sent to Empire!');">
+                        <input type="text" placeholder="Your Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:outline-none focus:border-cyber transition-all">
+                        <textarea placeholder="Message Protocol" rows="4" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:outline-none focus:border-cyber transition-all"></textarea>
+                        <button class="imperial-gradient w-full py-4 rounded-xl font-black text-black uppercase tracking-widest italic">Transmit Signal</button>
+                    </form>
+                </div>
+                <div class="space-y-6">
+                    <a href="https://discord.gg/your-empire" class="glass p-8 rounded-3xl flex items-center gap-6 hover:bg-white/5 transition-all block">
+                        <i class="fab fa-discord text-4xl text-cyber"></i>
+                        <div>
+                            <h4 class="font-bold">Official Support</h4>
+                            <p class="text-xs text-gray-500 font-mono italic">discord.gg/elhakim-empire</p>
+                        </div>
+                    </a>
+                    <a href="mailto:core@elhakimai.tech" class="glass p-8 rounded-3xl flex items-center gap-6 hover:bg-white/5 transition-all block">
+                        <i class="fas fa-envelope text-4xl text-imperial"></i>
+                        <div>
+                            <h4 class="font-bold">Encrypted Mail</h4>
+                            <p class="text-xs text-gray-500 font-mono italic">core@elhakimai.tech</p>
+                        </div>
+                    </a>
                 </div>
             </div>
-            <div class="glass-card p-12 rounded-[50px]">
-                <h2 class="font-empire text-3xl mb-8 text-blue-400">PRIVACY PROTOCOL</h2>
-                <div class="text-gray-400 text-sm leading-loose">
-                    <p class="mb-4">Kami menghargai privasi warga Empire. ElhakimAI menggunakan sistem enkripsi berlapis. Data yang kami simpan hanya terbatas pada metadata profil untuk memudahkan manajemen dashboard.</p>
-                    <p class="mb-4 italic">"Keamanan Anda adalah kedamaian bagi Empire of Elhakim."</p>
-                </div>
-            </div>
         </div>
     </section>
 
-    <section id="contact" class="px-6 text-center">
-        <div class="max-w-4xl mx-auto glass-card p-16 rounded-[60px] border- empire">
-            <h2 class="font-empire text-5xl mb-6">KONTAK KAMI</h2>
-            <p class="text-gray-400 mb-12">Butuh bantuan langsung dari tim Empire? Gunakan jalur transmisi di bawah.</p>
-            <div class="flex flex-col md:flex-row gap-8 justify-center">
-                <a href="mailto:admin@elhakimai.tech" class="flex items-center gap-4 glass-card px-8 py-4 rounded-2xl hover:bg-white/5 transition">
-                    <i class="fas fa-envelope text-2xl text-red-500"></i>
-                    <span class="font-bold">EMAIL EMPIRE</span>
-                </a>
-                <a href="https://discord.gg/yourserver" class="flex items-center gap-4 glass-card px-8 py-4 rounded-2xl hover:bg-white/5 transition">
-                    <i class="fab fa-discord text-2xl text-blue-500"></i>
-                    <span class="font-bold">SUPPORT SERVER</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-12 border-t border-white/5 px-6">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center opacity-40">
-            <span class="font-empire text-xs tracking-[0.3em]">© 2026 EMPIRE OF ELHAKIM • ALL RIGHTS RESERVED</span>
-            <div class="flex gap-8 mt-4 md:mt-0 text-xs font-black">
-                <a href="#">TWITTER</a>
-                <a href="#">GITHUB</a>
-                <a href="#">INSTAGRAM</a>
+    <footer class="mt-40 border-t border-white/5 py-12 px-6 text-center">
+        <div class="max-w-7xl mx-auto opacity-40 hover:opacity-100 transition-all">
+            <p class="font-mono text-[10px] tracking-[0.4em] uppercase mb-4 text-cyber">© 2026 EMPIRE OF ELHAKIM DIGITAL SUPREMACY</p>
+            <div class="flex justify-center gap-8">
+                <i class="fab fa-github cursor-pointer hover:text-white transition"></i>
+                <i class="fab fa-twitter cursor-pointer hover:text-cyber transition"></i>
+                <i class="fab fa-instagram cursor-pointer hover:text-imperial transition"></i>
             </div>
         </div>
     </footer>
 
     <script>
-        // --- ⚙️ EMPIRE CONFIG (GANTI DENGAN CLIENT ID BOT ANDA) ---
-        const CLIENT_ID = '1476115832517034026';
+        // --- CONFIGURATION ---
+        const CLIENT_ID = '1476115832517034026'; 
         const REDIRECT_URI = window.location.origin + '/';
 
-        function showPage(id) {
+        // --- NAVIGATION SPA ---
+        function navigate(id) {
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
             const target = document.getElementById(id);
             target.classList.add('active');
+            gsap.from(target, { duration: 0.8, y: 50, opacity: 0, ease: "power4.out" });
             window.scrollTo(0,0);
         }
 
-        function inviteBot() {
-            window.open(`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&permissions=8&scope=bot%20applications.commands`, '_blank');
-        }
-
+        // --- AUTH LOGIC ---
         function loginDiscord() {
             const scope = encodeURIComponent('identify guilds');
             const url = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${scope}`;
@@ -269,78 +291,70 @@
         }
 
         window.onload = () => {
-            const params = new URLSearchParams(window.location.hash.slice(1));
-            const token = params.get('access_token');
+            const hash = new URLSearchParams(window.location.hash.slice(1));
+            const token = hash.get('access_token');
+
             if (token) {
-                loadEmpireData(token);
+                renderUser(token);
                 window.history.replaceState({}, document.title, "/");
             }
             animateStats();
         }
 
-        async function loadEmpireData(token) {
+        async function renderUser(token) {
             try {
-                // Get User Profile
-                const uRes = await fetch('https://discord.com/api/users/@me', {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
-                const user = await uRes.json();
+                // User Info
+                const uReq = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } });
+                const user = await uReq.json();
 
-                // Get User Guilds
-                const gRes = await fetch('https://discord.com/api/users/@me/guilds', {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
-                const guilds = await gRes.json();
-
-                // Simulasi Perhitungan Data User di Seluruh Server yang Diikuti
-                // (Dalam dunia nyata, ini diambil dari Database Bot Anda)
-                const totalSimulatedUsers = Math.floor(Math.random() * (1500 - 100 + 1)) + 100;
-
-                // Update UI
-                document.getElementById('auth-section').innerHTML = `
-                    <div class="flex items-center gap-3 bg-empire/10 p-1.5 pr-5 rounded-full border border-empire/30">
-                        <img src="https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png" class="w-9 h-9 rounded-full">
-                        <span class="text-xs font-black uppercase tracking-widest text-empire">${user.username}</span>
+                document.getElementById('auth-status').innerHTML = `
+                    <div class="flex items-center gap-3 glass p-1.5 pr-6 rounded-full border-cyber/50">
+                        <img src="https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png" class="w-8 h-8 rounded-full">
+                        <span class="text-[10px] font-black tracking-widest uppercase">${user.username}</span>
                     </div>
                 `;
 
                 document.getElementById('u-avatar').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
-                document.getElementById('u-name').innerText = user.username;
+                document.getElementById('u-name').innerText = user.username.toUpperCase();
                 document.getElementById('u-id').innerText = `IDENTIFIER: ${user.id}`;
-                document.getElementById('u-total-users').innerText = totalSimulatedUsers + " WARGA";
+                document.getElementById('dash-locked').classList.add('hidden');
+                document.getElementById('dash-unlocked').classList.remove('hidden');
 
-                document.getElementById('db-locked').classList.add('hidden');
-                document.getElementById('db-content').classList.remove('hidden');
+                // Guilds Info
+                const gReq = await fetch('https://discord.com/api/users/@me/guilds', { headers: { Authorization: `Bearer ${token}` } });
+                const guilds = await gReq.json();
+                const myGuilds = guilds.filter(g => (g.permissions & 0x8) === 0x8);
 
-                const list = document.getElementById('u-servers');
-                const adminGuilds = guilds.filter(g => (g.permissions & 0x8) === 0x8);
-                list.innerHTML = adminGuilds.slice(0, 6).map(g => `
-                    <div class="glass-card p-6 rounded-3xl text-center hover:scale-105 transition border-b-2 border-white/5">
-                        ${g.icon ? `<img src="https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png" class="w-16 h-16 rounded-2xl mx-auto mb-4 shadow-xl">` : `<div class="w-16 h-16 bg-empire/20 rounded-2xl mx-auto mb-4 flex items-center justify-center font-empire text-xl text-empire">${g.name[0]}</div>`}
-                        <h4 class="font-bold text-sm truncate">${g.name}</h4>
-                        <button onclick="inviteBot()" class="mt-4 text-[10px] bg-white text-black px-4 py-2 rounded-lg font-black uppercase italic">Sync Empire</button>
+                document.getElementById('u-guilds').innerHTML = myGuilds.map(g => `
+                    <div class="glass p-6 rounded-3xl text-center border-b-4 border-cyber/20 hover:border-cyber transition-all">
+                        ${g.icon ? `<img src="https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png" class="w-16 h-16 rounded-2xl mx-auto mb-4">` : `<div class="w-16 h-16 bg-white/5 rounded-2xl mx-auto mb-4 flex items-center justify-center font-tech text-cyber">${g.name[0]}</div>`}
+                        <h4 class="font-bold text-xs truncate uppercase tracking-widest">${g.name}</h4>
+                        <button onclick="inviteBot()" class="mt-4 text-[9px] font-black border border-cyber/30 text-cyber px-4 py-2 rounded-lg uppercase tracking-tighter hover:bg-cyber hover:text-black transition-all">Synchronize AI</button>
                     </div>
                 `).join('');
 
-                showPage('dashboard');
-
-            } catch (err) {
-                console.error("EMPIRE_SYNC_ERROR", err);
+                navigate('dashboard');
+            } catch (e) {
+                console.error("Empire Sync Failed", e);
             }
         }
 
+        function inviteBot() {
+            window.open(`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&permissions=8&scope=bot%20applications.commands`, '_blank');
+        }
+
         function animateStats() {
-            gsap.from("#stat-users, #stat-servers, #stat-tasks", {
+            gsap.from("#stat-u, #stat-s", {
                 textContent: 0,
-                duration: 2,
-                ease: "power1.out",
+                duration: 2.5,
+                ease: "power2.out",
                 snap: { textContent: 1 },
-                stagger: 0.2
+                stagger: 0.3
             });
         }
 
         // GSAP Nav Entrance
-        gsap.from("nav", { duration: 1.5, y: -100, opacity: 0, ease: "expo.out" });
+        gsap.from("nav", { duration: 1, y: -100, opacity: 0, ease: "expo.out" });
     </script>
 </body>
 </html>
